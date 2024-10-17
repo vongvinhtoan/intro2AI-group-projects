@@ -18,3 +18,6 @@ pip install -r requirements.txt
 ```
 
 We will use **Pygame** for visualization.
+
+Commit frequently and use Github Copilot for better commit messages.
+![Copilot commit suggestion](Copilot%20commit%20suggestion.png)
