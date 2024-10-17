@@ -1,7 +1,17 @@
 # Project 1: Search
 
 ### Problem statement: [Project 1](Project%201%20-%20Search.pdf)
-### Workflow
+### Work division
+
+Algorithm implementations division:
+| Student ID | Name                 | Algorithm            |
+| ---------- | -------------------- | -------------------- |
+| 22125038   | Nguyễn Đăng Khoa     | Breadth First Search |
+| 22125049   | Huỳnh Hà Phương Linh | Depth First Search   |
+| 22125077   | Nguyễn Hoàng Phúc    | Uniform Cost Search  |
+| 22125108   | Vòng Vĩnh Toàn       | A* Search            |
+
+### Project notes
 
 Everyone is recommended to use Anaconda/Miniconda for managing the environments.
 
