@@ -12,6 +12,7 @@ class SearchOutput:
         self.numSteps = numSteps
         self.totalWeight = totalWeight
         self.numNodesExpanded = numNodesExpanded
+        self.solution = solution
 
     def __str__(self):
         message = f"{self.strategy_name}"

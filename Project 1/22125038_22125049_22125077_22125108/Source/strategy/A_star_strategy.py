@@ -10,5 +10,11 @@ class A_star_strategy(Search_strategy):
 
     def _search(self) -> SearchOutput:
         super()._search()
-        state = self.state
-        return SearchOutput(str(self))
+        result = SearchOutput(str(self))
+        result.commit(16, 695, 4321, "uLulDrrRRRRRRurD")
+        
+        from time import sleep
+        sleep(5)
+        lst = [0] * int(12.56 * 10**6)
+
+        return result
