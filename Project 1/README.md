@@ -47,6 +47,14 @@ Please write the test case overviews after designing the test cases below.
 | input-09  |     |     |           |             |
 | input-10  |     |     |           |             |
 
+### Run the project
+
+To run the project, run the following command:
+```bash
+cd ./22125038_22125049_22125077_22125108/Source/
+python main.py
+```
+
 ### Project notes
 
 Everyone is recommended to use Anaconda/Miniconda for managing the environments.
