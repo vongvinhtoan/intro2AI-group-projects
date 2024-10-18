@@ -18,7 +18,8 @@ def main():
     solvers = [solver_dict[strategy] for strategy in strategies]
     
     for input_file, output_file in zip(input_files, output_files):
-        state = SearchState(input_file)
+        state = SearchState()
+        state.parse_input(input_file)
 
         # Clear the output file
         open(output_file, 'w').close()
