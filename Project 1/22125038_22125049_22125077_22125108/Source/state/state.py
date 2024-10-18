@@ -1,22 +1,29 @@
-WALL = '#'
-EMPTY = ' '
-STONE = '$'
-AGENT = '@'
-SWITCH = '.'
-STONE_SWITCH = '*'
-AGENT_SWITCH = '+'
+import numpy as np
+import itertools
 
-class Cell:
-    def __init__(self, value: str):
-        self.value = value
+STONE = -1
+EMPTY = 0
+AGENT = 1
+WALL = 2
+SWITCH = 4
+STONE_SWITCH = 8
+AGENT_SWITCH = 6
 
-    def __str__(self):
-        return self.value
-    
-class Stone(Cell):
-    def __init__(self, weight: int):
-        super().__init__(STONE)
-        self.weight = weight
+value_map = {
+    '#': WALL,
+    ' ': EMPTY,
+    '$': STONE,
+    '@': AGENT,
+    '.': SWITCH,
+    '*': STONE_SWITCH,
+    '+': AGENT_SWITCH
+}
+
+char_map = {value: key for key, value in value_map.items()}
+def cellType(cell):
+    if cell < 0:
+        return STONE
+    return cell
 
 class SearchState:
     def __init__(self, file_input: str):
@@ -27,20 +34,21 @@ class SearchState:
         with open(file_input, 'r') as f:
             lines = f.readlines()
             weights = list(map(int, lines[0].split()))
+            lines = lines[1:]
+
             def toCell(char):
-                if char != STONE:
-                    return Cell(char)
-                else:
-                    return Stone(weights.pop(0))
-            self.state = [list(map(toCell, line[:-1])) for line in lines][1:]
+                return -weights.pop(0) if cellType(value_map[char]) == STONE else value_map[char]
+            
+            self.state = np.array([list(map(toCell, line[:-1])) for line in lines])
 
     def __str__(self):
         weights = []
-        for row in self.state:
-            for cell in row:
-                if str(cell) == STONE:
-                    weights.append(cell.weight)
+        for row, col in itertools.product(range(len(self.state)), range(len(self.state[0]))):
+            cell = self.state[row, col]
+            if cellType(cell) == STONE:
+                weights.append(int(-cell))
+        
         string = ''
         string += str(weights) + '\n'
-        string += '\n'.join([''.join([str(cell) for cell in row]) for row in self.state])
+        string += '\n'.join([''.join([str(char_map[cellType(cell)]) for cell in row]) for row in self.state])
         return string
