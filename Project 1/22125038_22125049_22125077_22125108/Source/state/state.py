@@ -19,19 +19,21 @@ value_map = {
     '+': AGENT_SWITCH
 }
 
+max_value = max(value_map.values())
+
 char_map = {value: key for key, value in value_map.items()}
 def cellType(cell):
     if cell < 0:
         return STONE
-    if cell > max(value_map.values()):
+    if cell > max_value:
         return STONE_SWITCH
     return cell
 
 def weight(cell):
     if cell < 0:
         return -cell
-    if cell > max(value_map.values()):
-        return cell - max(value_map.values())
+    if cell > max_value:
+        return cell - max_value
     return 0
 
 class SearchState:
@@ -50,7 +52,7 @@ class SearchState:
                     if cellType(value_map[char]) == STONE:
                         return -weights.pop(0)
                     if cellType(value_map[char]) == STONE_SWITCH:
-                        return weights.pop(0) + max(value_map.values())
+                        return weights.pop(0) + max_value
                 except IndexError:
                     raise ValueError("The input file does not contain enough weights")
                 return value_map[char]
