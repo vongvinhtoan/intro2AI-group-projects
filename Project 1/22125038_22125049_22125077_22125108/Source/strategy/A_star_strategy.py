@@ -8,17 +8,14 @@ class A_star_strategy(Search_strategy):
     def __str__(self):
         return "A*"
 
-    def _search(self) -> SearchOutput:
-        super()._search()
-        print(self.state)
-        print(weight(self.state[3, 4]))
-        result = SearchOutput(str(self))
+    def _search(self, initial_state: SearchState, result: SearchOutput) -> None:
+        super()._search(initial_state, result)
 
-        
-        result.commit(16, 695, 4321, "uLulDrrRRRRRRurD")
-        
-        from time import sleep
-        sleep(2)
-        lst = [0] * int(12.56 * 10**6)
+        # Your code here
 
-        return result
+        result.commit(
+            numSteps=16, 
+            totalWeight=695, 
+            numNodesExpanded=4321, 
+            solution="uLulDrrRRRRRRurD"
+        )

@@ -24,7 +24,7 @@ def main():
         open(output_file, 'w').close()
 
         for solver in solvers:
-            solver.set_state(state)
+            solver.set_initial_state(state)
             output = solver.search()
             output.write(output_file)
 

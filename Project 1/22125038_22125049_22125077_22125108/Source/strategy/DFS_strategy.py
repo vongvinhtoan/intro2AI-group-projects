@@ -8,7 +8,14 @@ class DFS_strategy(Search_strategy):
     def __str__(self):
         return "DFS"
 
-    def _search(self) -> SearchOutput:
-        super()._search()
-        state = self.state
-        return SearchOutput(str(self))
+    def _search(self, initial_state: SearchState, result: SearchOutput) -> None:
+        super()._search(initial_state, result)
+
+        # Your code here
+
+        result.commit(
+            numSteps=16, 
+            totalWeight=695, 
+            numNodesExpanded=4321, 
+            solution="uLulDrrRRRRRRurD"
+        )
