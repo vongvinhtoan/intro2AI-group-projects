@@ -9,6 +9,13 @@ SWITCH = 4
 STONE_SWITCH = 8
 AGENT_SWITCH = 6
 
+agent_directions = {
+    'u': (-1, 0),
+    'd': (1, 0),
+    'l': (0, -1),
+    'r': (0, 1)
+}
+
 value_map = {
     '#': WALL,
     ' ': EMPTY,
@@ -34,10 +41,46 @@ def weight(cell):
         return cell - max(value_map.values())
     return 0
 
+def removeStone(cell):
+    if cellType(cell) == STONE:
+        return EMPTY
+    if cellType(cell) == STONE_SWITCH:
+        return SWITCH
+    assert False, "Cannot remove stone from cell"
+
+def addStone(cell, w):
+    if cellType(cell) == EMPTY:
+        return -w
+    if cellType(cell) == SWITCH:
+        return w + max(value_map.values())
+    assert False, "Cannot add stone to cell"
+
+def addAgent(cell):
+    if cellType(cell) == EMPTY:
+        return AGENT
+    if cellType(cell) == SWITCH:
+        return AGENT_SWITCH
+    assert False, "Cannot add agent to cell"
+
+def removeAgent(cell):
+    if cellType(cell) == AGENT:
+        return EMPTY
+    if cellType(cell) == AGENT_SWITCH:
+        return SWITCH
+    assert False, "Cannot remove agent from cell"
+
 class SearchState:
-    def __init__(self, file_input: str):
+    def __init__(self, input_state: str|np.ndarray):
         self.state = None
-        self.parse_input(file_input)
+        self.agentPosition = None
+        if type(input_state) == np.ndarray:
+            self.state = input_state.copy()
+        else:
+            self.parse_input(input_state)
+
+        for row, col in itertools.product(range(len(self.state)), range(len(self.state[0]))):
+            if cellType(self.state[row, col]) in [AGENT, AGENT_SWITCH]:
+                self.agentPosition = (row, col)
 
     def parse_input(self, file_input: str):
         with open(file_input, 'r') as f:
