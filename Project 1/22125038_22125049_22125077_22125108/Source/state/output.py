@@ -9,6 +9,14 @@ class SearchOutput:
         self.solution = ""
 
     def commit(self, numSteps: int, totalWeight: int, numNodesExpanded: int, solution: str):
+        """
+        Commit the search result
+
+        :param numSteps: Total number of steps required to solve the problem
+        :param totalWeight: Total weight of the solution
+        :param numNodesExpanded: Number of expanded/reached nodes
+        :param solution: The solution string
+        """
         self.numSteps = numSteps
         self.totalWeight = totalWeight
         self.numNodesExpanded = numNodesExpanded

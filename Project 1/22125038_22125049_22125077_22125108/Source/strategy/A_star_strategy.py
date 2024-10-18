@@ -10,8 +10,11 @@ class A_star_strategy(Search_strategy):
 
     def _search(self) -> SearchOutput:
         super()._search()
-        print(str(self.state))
+        print(self.state)
+        print(weight(self.state[3, 4]))
         result = SearchOutput(str(self))
+
+        
         result.commit(16, 695, 4321, "uLulDrrRRRRRRurD")
         
         from time import sleep
