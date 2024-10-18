@@ -65,10 +65,34 @@ conda create -n AI-P1 python=3.10
 conda activate AI-P1
 ```
 
+If you cannot afford a Anaconda/Miniconda manager, you can create a new virtual environment integrated into Python itself. Make sure before creating the environment, your Python version is atleast 3.10. To check your Python version, run:
+```bash
+python --version
+```
+
+To create a new virtual environment, make sure you are in the directory (relative to this file) `./22125038_22125049_22125077_22125108/Source/` and run this command:
+```bash
+python -m venv venv
+```
+
+Now each time you open the project, make sure to activate the environment, to activate you can run something like this:
+```bash
+.\venv\Scripts\activate
+```
+Depends on the Python version you have, the path to `activate` may be different.
+
+Now to check that the environment is activated, your command line should look something like this:
+![Indication for your success in activating the environment](Environment%20successfully%20activated.png)
+
 To install the required packages, run the following command:
 ```bash
 cd ./Source/22125038_22125049_22125077_22125108/
 pip install -r requirements.txt
+```
+
+To update the packages in your Python environment, please run:
+```bash
+pip freeze > requirements.txt
 ```
 
 We will use **Pygame** for visualization.
