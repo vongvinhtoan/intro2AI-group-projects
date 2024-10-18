@@ -23,7 +23,16 @@ char_map = {value: key for key, value in value_map.items()}
 def cellType(cell):
     if cell < 0:
         return STONE
+    if cell > max(value_map.values()):
+        return STONE_SWITCH
     return cell
+
+def weight(cell):
+    if cell < 0:
+        return -cell
+    if cell > max(value_map.values()):
+        return cell - max(value_map.values())
+    return 0
 
 class SearchState:
     def __init__(self, file_input: str):
@@ -37,7 +46,11 @@ class SearchState:
             lines = lines[1:]
 
             def toCell(char):
-                return -weights.pop(0) if cellType(value_map[char]) == STONE else value_map[char]
+                if cellType(value_map[char]) == STONE:
+                    return -weights.pop(0)
+                if cellType(value_map[char]) == STONE_SWITCH:
+                    return weights.pop(0) + max(value_map.values())
+                return value_map[char]
             
             self.state = np.array([list(map(toCell, line[:-1])) for line in lines])
 
@@ -45,8 +58,8 @@ class SearchState:
         weights = []
         for row, col in itertools.product(range(len(self.state)), range(len(self.state[0]))):
             cell = self.state[row, col]
-            if cellType(cell) == STONE:
-                weights.append(int(-cell))
+            if cellType(cell) in [STONE, STONE_SWITCH]:
+                weights.append(int(weight(cell)))
         
         string = ''
         string += str(weights) + '\n'
