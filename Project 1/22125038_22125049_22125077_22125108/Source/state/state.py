@@ -46,10 +46,13 @@ class SearchState:
             lines = lines[1:]
 
             def toCell(char):
-                if cellType(value_map[char]) == STONE:
-                    return -weights.pop(0)
-                if cellType(value_map[char]) == STONE_SWITCH:
-                    return weights.pop(0) + max(value_map.values())
+                try:
+                    if cellType(value_map[char]) == STONE:
+                        return -weights.pop(0)
+                    if cellType(value_map[char]) == STONE_SWITCH:
+                        return weights.pop(0) + max(value_map.values())
+                except IndexError:
+                    raise ValueError("The input file does not contain enough weights")
                 return value_map[char]
             
             self.state = np.array([list(map(toCell, line[:-1])) for line in lines])
