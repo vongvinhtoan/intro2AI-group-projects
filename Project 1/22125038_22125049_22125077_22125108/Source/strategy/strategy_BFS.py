@@ -8,10 +8,10 @@ class Strategy_BFS(SearchStrategy):
     def __str__(self):
         return "BFS"
 
-    def search(self, problem: Problem, result: SearchOutput) -> None:
-        super().search(problem, result)
-        
+    def search(self, problem: Problem) -> SearchNode|None:
+        super().search(problem)
+
         node = SearchNode(problem.initial_state)
         node = SearchNode(problem.initial_state)
-        
-        result.commit("uLulDrrRRRRRRurD", 0)
+
+        return node

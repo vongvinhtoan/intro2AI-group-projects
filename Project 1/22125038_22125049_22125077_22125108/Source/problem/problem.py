@@ -14,7 +14,7 @@ class Problem:
 
     def is_goal(self, state: SearchState) -> bool:
         for position in state.stone_positions:
-            if self.environment[position] != SWITCH:
+            if self.environment[position[0], position[1]] != SWITCH:
                 return False
         return True
     

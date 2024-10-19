@@ -1,5 +1,5 @@
 from .searchstate import SearchState
-from .searchoutput import SearchOutput
+from .problemresult import ProblemResult
 from .searchnode import SearchNode
 from .searchaction import Action
 from .problem import Problem
@@ -7,9 +7,9 @@ from .environment import WALL, EMPTY, SWITCH
 
 __all__ = [
     'SearchState',
-    'SearchOutput',
     "SearchNode",
     'Action',
     "Problem",
+    'ProblemResult',
     "WALL", "EMPTY", "SWITCH",
 ]

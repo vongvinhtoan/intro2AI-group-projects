@@ -8,14 +8,12 @@ class Strategy_A_star(SearchStrategy):
     def __str__(self):
         return "A*"
 
-    def search(self, problem: Problem, result: SearchOutput) -> None:
-        super().search(problem, result)
+    def search(self, problem: Problem) -> SearchNode|None:
+        super().search(problem)
 
         node = SearchNode(problem.initial_state)
         node = SearchNode(problem.initial_state)
-        node = SearchNode(problem.initial_state)
-        node = SearchNode(problem.initial_state)
 
-        print(problem.to_str(problem.initial_state))
-        
-        result.commit("uLulDrrRRRRRRurD", 0)
+        print(problem.to_str(node.state))
+
+        return node

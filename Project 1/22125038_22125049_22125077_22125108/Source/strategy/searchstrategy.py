@@ -1,5 +1,4 @@
 from problem import *
-
 import tracemalloc
 import time
 
@@ -10,16 +9,17 @@ class SearchStrategy:
     def set_state(self, state: SearchState):
         self.state = state
 
-    def search(self, problem: Problem, result: SearchOutput) -> None:
+    def search(self, problem: Problem) -> SearchNode|None:
         print(f"{str(self)} search")
 
-    def solve(self, problem: Problem) -> SearchOutput:
+    def solve(self, problem: Problem) -> ProblemResult:
         tracemalloc.start()
         start_time = time.time()
-        result = SearchOutput(str(self))
+        result = ProblemResult()
+        result.strategy_name = str(self)
         SearchNode.clear()
 
-        self.search(problem, result)
+        result.set_result(self.search(problem), problem)
         
         _, peak = tracemalloc.get_traced_memory()
         tracemalloc.stop()
