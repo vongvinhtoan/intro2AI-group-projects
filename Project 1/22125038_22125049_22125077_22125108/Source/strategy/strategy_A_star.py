@@ -1,5 +1,6 @@
 from .searchstrategy import SearchStrategy
 from problem import *
+from queue import PriorityQueue
 
 class Strategy_A_star(SearchStrategy):
     def __init__(self):
@@ -12,8 +13,8 @@ class Strategy_A_star(SearchStrategy):
         super().search(problem)
 
         node = SearchNode(problem.initial_state)
-        node = SearchNode(problem.initial_state)
-
-        print(problem.to_str(node.state))
+        
+        for child in problem.expand(node):
+            print(problem.to_str(child.state))
 
         return node
