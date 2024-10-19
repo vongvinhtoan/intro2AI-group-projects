@@ -1,4 +1,4 @@
-from state import *
+from problem import *
 from strategy import *
 
 def parse_args():
@@ -16,18 +16,20 @@ def main():
     output_files = args['output_files']
 
     solvers = [solver_dict[strategy] for strategy in strategies]
-    
-    for input_file, output_file in zip(input_files, output_files):
-        state = SearchState()
-        state.parse_input(input_file)
 
-        # Clear the output file
-        open(output_file, 'w').close()
+    def file_streams(input_files, output_files):
+        for input_file, output_file in zip(input_files, output_files):
+            input_stream = open(input_file, 'r')
+            output_stream = open(output_file, 'w')
+            yield input_stream, output_stream
+    
+    for input_stream, output_stream in file_streams(input_files, output_files):
+        problem = Problem()
+        problem.parse_input(input_stream)
 
         for solver in solvers:
-            solver.set_state(state)
-            output = solver.search()
-            output.write(output_file)
+            output = solver.solve(problem)
+            output_stream.write(str(output) + '\n')
 
 if __name__ == '__main__':
     main()

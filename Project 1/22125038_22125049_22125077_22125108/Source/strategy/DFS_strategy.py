@@ -1,5 +1,5 @@
 from .Search_strategy import Search_strategy
-from state import *
+from problem import *
 
 class DFS_strategy(Search_strategy):
     def __init__(self):
@@ -8,7 +8,7 @@ class DFS_strategy(Search_strategy):
     def __str__(self):
         return "DFS"
 
-    def _search(self) -> SearchOutput:
-        super()._search()
-        state = self.state
-        return SearchOutput(str(self))
+    def search(self, problem: Problem, result: SearchOutput) -> None:
+        super().search(problem, result)
+        
+        result.commit(0, 0, 0, "uLulDrrRRRRRRurD")
