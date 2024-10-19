@@ -19,28 +19,29 @@ class Problem:
         return True
     
     def actions(self, state: SearchState) -> Generator[Action, None, None]:
-        def is_valid_position(position: tuple[int, int], direction: tuple[int, int]) -> bool:
-            row, col = position
-            drow, dcol = direction
-            row += drow; col += dcol
-            if row < 0 or row >= self.environment.shape[0] or col < 0 or col >= self.environment.shape[1]: return False
-            if self.environment[row, col] == WALL: return False
-            if (row, col) in state.stone_positions:
-                if self.environment[row + drow, col + dcol] == WALL: return False
-                if (row + drow, col + dcol) in state.stone_positions: return False
-            return True
+        def is_valid_position(position: np.ndarray, direction: np.ndarray) -> bool:
+            position = position.copy()
+            position += direction
+            if not (0 <= position[0] < self.environment.shape[0] and 0 <= position[1] < self.environment.shape[1]): return False, None
+            if self.environment[tuple(position)] == WALL: return False, None
+            if np.any(np.all(state.stone_positions == position, axis=1)):
+                if self.environment[tuple(position + direction)] == WALL: return False, None
+                if np.any(np.all(state.stone_positions == position+direction, axis=1)): return False, None
+                return True, True
+            return True, False
         
         for action, direction in action_map.items():
-            if is_valid_position(state.agent_position, direction):
-                yield Action(action)
+            valid, to_push = is_valid_position(state.agent_position, direction)
+            if valid:
+                yield Action(action, to_push)
 
     def result(self, state: SearchState, action: Action) -> tuple[SearchState, int]:
         drow, dcol = action_map[action.action]
         new_state = state.copy()
-        new_state.agent_position = (new_state.agent_position[0] + drow, new_state.agent_position[1] + dcol)
+        new_state.agent_position += np.array([drow, dcol], dtype=np.int32)
         action_cost = 1
         for i, position in enumerate(new_state.stone_positions):
-            if position == new_state.agent_position:
+            if np.array_equal(new_state.agent_position, position):
                 new_state.stone_positions[i] = (position[0] + drow, position[1] + dcol)
                 action_cost += self.environment.stone_weights[i]
                 break
