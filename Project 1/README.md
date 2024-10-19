@@ -36,11 +36,11 @@ Test generation division:
 Please write the test case overviews after designing the test cases below.
 | Test case | row | col | rockCount | description |
 | --------- | --- | --- | --------- | ----------- |
-| input-01  |     |     |           |             |
-| input-02  |     |     |           |             |
-| input-03  |     |     |           |             |
-| input-04  |     |     |           |             |
-| input-05  |     |     |           |             |
+| input-01  |  6 | 12   | 2          |  Easy: Clear path from rocks to switches.       |
+| input-02  |   7 | 9    | 4          |  Moderate: One rock pre-placed on incorrect switch. Initial maneuvering required for two rocks, remaining steps are straightforward.       |
+| input-03  |   12  | 7    |      3     |   Hard: Narrow maze with three rocks (two adjacent, two near a wall), requiring careful maneuvering.          |
+| input-04  |  8   |  9   |  5         |   Hard: Narrow maze with four rocks (incorrectly placed on switches) blocking the path. Significant maneuvering of all five rocks is required.          |
+| input-05  |  9   |   7  |      6     |   Hard: Narrow maze with six rocks. Four rocks are incorrectly positioned on switches, and two completely block the path. Rocks cannot be pushed all the way, requiring careful maneuvering and strategic placement to create space to reach other rocks.          |
 | input-06  |     |     |           |             |
 | input-07  |     |     |           |             |
 | input-08  |     |     |           |             |
