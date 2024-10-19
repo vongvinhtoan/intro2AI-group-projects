@@ -1,7 +1,7 @@
 from .searchstrategy import SearchStrategy
 from problem import *
 
-import heapq
+from queue import PriorityQueue
 
 class Strategy_UCS(SearchStrategy):
     def __init__(self):
@@ -14,21 +14,23 @@ class Strategy_UCS(SearchStrategy):
         super().search(problem)
 
         node = SearchNode(problem.initial_state)
-        frontier : list[SearchNode] = []
+        frontier : PriorityQueue[SearchNode] = PriorityQueue()
 
-        heapq.heappush(frontier, node)
+        frontier.put(node)
         reached = {node.state: node}
 
         while frontier:
-            node = heapq.heappop(frontier)
-            # print(node.state, list(map(lambda x: x.state.__str__(), problem.expand(node))))
-
+            node = frontier.get()
+            
             if problem.is_goal(node.state):
                 return node
+            
+            if reached[node.state].path_cost < node.path_cost:
+                continue
 
             for child in problem.expand(node):
                 s = child.state
                 if s not in reached or child.path_cost < reached[s].path_cost:
                     reached[s] = child
-                    heapq.heappush(frontier, child)
+                    frontier.put(child)
         return None
