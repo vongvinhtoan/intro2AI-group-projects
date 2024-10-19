@@ -72,4 +72,4 @@ class Problem:
         string = ''
         string += str(display_weights) + '\n'
         string += '\n'.join([''.join(row) for row in map])
-        return str(string)
+        return string
