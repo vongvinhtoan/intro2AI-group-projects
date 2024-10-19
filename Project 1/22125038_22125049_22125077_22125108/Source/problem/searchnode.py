@@ -13,8 +13,13 @@ class SearchNode:
         self.parent = parent
         self.action = action
         self.path_cost = path_cost
-        self.node_id = SearchNode.node_count
         SearchNode.node_count += 1
 
-    def copy(self):
+    def copy(self) -> 'SearchNode':
         return SearchNode(self.state.copy(), self.parent, self.action, self.path_cost)
+    
+    def __eq__(self, other: 'SearchNode') -> bool:
+        pass 
+
+    def __hash__(self) -> int:
+        pass
