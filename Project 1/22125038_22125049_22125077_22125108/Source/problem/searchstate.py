@@ -12,7 +12,7 @@ class SearchState:
         return np.array_equal(self.agent_position, other.agent_position) and np.array_equal(self.stone_positions, other.stone_positions)
     
     def __hash__(self) -> int:
-        return hash((tuple(self.agent_position), tuple(self.stone_positions)))
+        return hash((tuple(self.agent_position.tolist()), tuple((tuple(i) for i in self.stone_positions.tolist()))))
     
     def __str__(self) -> str:
         return f"Agent: {self.agent_position}, Stones: {self.stone_positions}"

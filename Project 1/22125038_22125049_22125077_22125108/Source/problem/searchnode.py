@@ -23,3 +23,6 @@ class SearchNode:
 
     def __hash__(self) -> int:
         pass
+
+    def __lt__(self, other):
+        return self.path_cost < other.path_cost
