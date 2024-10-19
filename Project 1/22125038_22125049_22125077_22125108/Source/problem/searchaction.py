@@ -8,8 +8,9 @@ action_map : dict[str, np.ndarray] = {
 }
 
 class Action:
-    def __init__(self, action: str):
+    def __init__(self, action: str, to_push: bool):
         self.action = action
+        self.to_push = to_push
 
     def __str__(self):
-        return f"Action: {self.action}, Direction: {action_map[self.action.lower()]}"
+        return self.action if not self.to_push else self.action.upper()

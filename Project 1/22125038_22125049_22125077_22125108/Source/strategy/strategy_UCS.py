@@ -14,7 +14,7 @@ class Strategy_UCS(SearchStrategy):
         super().search(problem)
 
         node = SearchNode(problem.initial_state)
-        frontier = []
+        frontier : list[SearchNode] = []
 
         heapq.heappush(frontier, node)
         reached = {node.state: node}

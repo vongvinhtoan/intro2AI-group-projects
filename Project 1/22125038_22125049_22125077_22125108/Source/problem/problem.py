@@ -22,16 +22,18 @@ class Problem:
         def is_valid_position(position: np.ndarray, direction: np.ndarray) -> bool:
             position = position.copy()
             position += direction
-            if not (0 <= position[0] < self.environment.shape[0] and 0 <= position[1] < self.environment.shape[1]): return False
-            if self.environment[tuple(position)] == WALL: return False
+            if not (0 <= position[0] < self.environment.shape[0] and 0 <= position[1] < self.environment.shape[1]): return False, None
+            if self.environment[tuple(position)] == WALL: return False, None
             if np.any(np.all(state.stone_positions == position, axis=1)):
-                if self.environment[tuple(position + direction)] == WALL: return False
-                if np.any(np.all(state.stone_positions == position+direction, axis=1)): return False
-            return True
+                if self.environment[tuple(position + direction)] == WALL: return False, None
+                if np.any(np.all(state.stone_positions == position+direction, axis=1)): return False, None
+                return True, True
+            return True, False
         
         for action, direction in action_map.items():
-            if is_valid_position(state.agent_position, direction):
-                yield Action(action)
+            valid, to_push = is_valid_position(state.agent_position, direction)
+            if valid:
+                yield Action(action, to_push)
 
     def result(self, state: SearchState, action: Action) -> tuple[SearchState, int]:
         drow, dcol = action_map[action.action]

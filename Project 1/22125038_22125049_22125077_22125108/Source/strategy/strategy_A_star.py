@@ -14,7 +14,5 @@ class Strategy_A_star(SearchStrategy):
 
         node = SearchNode(problem.initial_state)
         
-        for child in problem.expand(node):
-            print(problem.to_str(child.state))
-
+        
         return node
