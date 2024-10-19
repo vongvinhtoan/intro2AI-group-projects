@@ -17,3 +17,6 @@ class SearchNode:
 
     def copy(self) -> 'SearchNode':
         return SearchNode(self.state.copy(), self.parent, self.action, self.path_cost)
+    
+    def __lt__(self, other: 'SearchNode') -> bool:
+        return self.path_cost < other.path_cost

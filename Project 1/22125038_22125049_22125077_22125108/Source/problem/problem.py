@@ -37,10 +37,10 @@ class Problem:
     def result(self, state: SearchState, action: Action) -> tuple[SearchState, int]:
         drow, dcol = action_map[action.action]
         new_state = state.copy()
-        new_state.agent_position = (new_state.agent_position[0] + drow, new_state.agent_position[1] + dcol)
+        new_state.agent_position += np.array([drow, dcol], dtype=np.int32)
         action_cost = 1
         for i, position in enumerate(new_state.stone_positions):
-            if position == new_state.agent_position:
+            if np.array_equal(new_state.agent_position, position):
                 new_state.stone_positions[i] = (position[0] + drow, position[1] + dcol)
                 action_cost += self.environment.stone_weights[i]
                 break
