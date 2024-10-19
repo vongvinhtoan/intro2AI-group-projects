@@ -1,7 +1,7 @@
-from .Search_strategy import Search_strategy
+from .searchstrategy import SearchStrategy
 from problem import *
 
-class BFS_strategy(Search_strategy):
+class Strategy_BFS(SearchStrategy):
     def __init__(self):
         super().__init__()
 
@@ -11,4 +11,7 @@ class BFS_strategy(Search_strategy):
     def search(self, problem: Problem, result: SearchOutput) -> None:
         super().search(problem, result)
         
-        result.commit(0, 0, 0, "uLulDrrRRRRRRurD")
+        node = SearchNode(problem.initial_state)
+        node = SearchNode(problem.initial_state)
+        
+        result.commit("uLulDrrRRRRRRurD", 0)

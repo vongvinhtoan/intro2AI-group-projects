@@ -1,8 +1,9 @@
 from problem import *
+
 import tracemalloc
 import time
 
-class Search_strategy:
+class SearchStrategy:
     def __init__(self):
         self.state = None
 
@@ -16,14 +17,16 @@ class Search_strategy:
         tracemalloc.start()
         start_time = time.time()
         result = SearchOutput(str(self))
+        SearchNode.clear()
+
         self.search(problem, result)
+        
         _, peak = tracemalloc.get_traced_memory()
         tracemalloc.stop()
         
         result.time = time.time() - start_time
         result.memory = peak / 10**6
-
-        print(f"{str(self)} search result: {result}")
+        result.numNodeGenerated = SearchNode.node_count
 
         return result
 

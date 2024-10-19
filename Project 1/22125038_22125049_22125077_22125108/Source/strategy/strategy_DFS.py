@@ -1,14 +1,14 @@
-from .Search_strategy import Search_strategy
+from .searchstrategy import SearchStrategy
 from problem import *
 
-class UCS_strategy(Search_strategy):
+class Strategy_DFS(SearchStrategy):
     def __init__(self):
         super().__init__()
 
     def __str__(self):
-        return "UCS"
+        return "DFS"
 
     def search(self, problem: Problem, result: SearchOutput) -> None:
         super().search(problem, result)
         
-        result.commit(0, 0, 0, "uLulDrrRRRRRRurD")
+        result.commit("uLulDrrRRRRRRurD", 0)
