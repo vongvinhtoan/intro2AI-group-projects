@@ -42,10 +42,10 @@ Please write the test case overviews after designing the test cases below.
 | input-04  |     |     |           |             |
 | input-05  |     |     |           |             |
 | input-06  |  6 | 12   | 2          |  Easy: Clear path from rocks to switches.       |
-| input-07  |   7 | 9    | 4          |  Moderate: One rock pre-placed on incorrect switch. Initial maneuvering required for two rocks, remaining steps are straightforward.       |
-| input-08  |   12  | 7    |      3     |   Hard: Narrow maze with three rocks (two adjacent, two near a wall), requiring careful maneuvering.          |
-| input-09  |  8   |  9   |  5         |   Hard: Narrow maze with four rocks (incorrectly placed on switches) blocking the path. Significant maneuvering of all five rocks is required.          |
-| input-10  |  9   |   7  |      6     |   Hard: Narrow maze with six rocks. Four rocks are incorrectly positioned on switches, and two completely block the path. Rocks cannot be pushed all the way, requiring careful maneuvering and strategic placement to create space to reach other rocks.          |
+| input-07  |   9 |7    | 4          |  Moderate: One rock pre-placed on incorrect switch. Initial maneuvering required for two rocks, remaining steps are straightforward.       |
+| input-08  |   7  | 12    |      3     |   Hard: Narrow maze with three rocks (two adjacent, two near a wall), requiring careful maneuvering.          |
+| input-09  |  9   |  8   |  5         |   Hard: Narrow maze with four rocks (incorrectly placed on switches) blocking the path. Significant maneuvering of all five rocks is required.          |
+| input-10  |  7  |   9 |      6     |   Hard: Narrow maze with six rocks. Four rocks are incorrectly positioned on switches, and two completely block the path. Rocks cannot be pushed all the way, requiring careful maneuvering and strategic placement to create space to reach other rocks.          |
 
 ### Run the project
 
