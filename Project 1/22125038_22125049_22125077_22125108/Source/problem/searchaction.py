@@ -1,8 +1,10 @@
-action_map : dict[str, tuple[int, int]] = {
-    "u": (-1, 0),
-    "d": (1, 0),
-    "l": (0, -1),
-    "r": (0, 1)
+import numpy as np
+
+action_map : dict[str, np.ndarray] = {
+    "u": np.array([-1, 0]),
+    "d": np.array([1, 0]),
+    "l": np.array([0, -1]),
+    "r": np.array([0, 1]),
 }
 
 class Action:

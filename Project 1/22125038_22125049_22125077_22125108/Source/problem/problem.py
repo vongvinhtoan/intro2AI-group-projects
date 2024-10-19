@@ -19,15 +19,14 @@ class Problem:
         return True
     
     def actions(self, state: SearchState) -> Generator[Action, None, None]:
-        def is_valid_position(position: tuple[int, int], direction: tuple[int, int]) -> bool:
-            row, col = position
-            drow, dcol = direction
-            row += drow; col += dcol
-            if row < 0 or row >= self.environment.shape[0] or col < 0 or col >= self.environment.shape[1]: return False
-            if self.environment[row, col] == WALL: return False
-            if (row, col) in state.stone_positions:
-                if self.environment[row + drow, col + dcol] == WALL: return False
-                if (row + drow, col + dcol) in state.stone_positions: return False
+        def is_valid_position(position: np.ndarray, direction: np.ndarray) -> bool:
+            position = position.copy()
+            position += direction
+            if not (0 <= position[0] < self.environment.shape[0] and 0 <= position[1] < self.environment.shape[1]): return False
+            if self.environment[tuple(position)] == WALL: return False
+            if np.any(np.all(state.stone_positions == position, axis=1)):
+                if self.environment[tuple(position + direction)] == WALL: return False
+                if np.any(np.all(state.stone_positions == position+direction, axis=1)): return False
             return True
         
         for action, direction in action_map.items():
