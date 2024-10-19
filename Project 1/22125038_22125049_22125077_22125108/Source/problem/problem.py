@@ -54,19 +54,13 @@ class Problem:
     
     def to_str(self, state: SearchState) -> str:
         map = self.environment.map_layer.copy()
-        if map[state.agent_position[0], state.agent_position[1]] == SWITCH:
-            map[state.agent_position[0], state.agent_position[1]] = AGENT_SWITCH
-        else:
-            map[state.agent_position[0], state.agent_position[1]] = AGENT
+
+        map[tuple(state.agent_position)] = AGENT if map[tuple(state.agent_position)] != SWITCH else AGENT_SWITCH
+        
         stone_positions, stone_weights = state.stone_positions, self.environment.stone_weights
-        tangled_stones = zip(stone_positions, stone_weights)
-        tangled_stones = sorted(tangled_stones, key=lambda x: (x[0][0], x[0][1]))
         display_weights = []
-        for position, weight in tangled_stones:
-            if map[position[0], position[1]] == SWITCH:
-                map[position[0], position[1]] = STONE_SWITCH
-            else:
-                map[position[0], position[1]] = STONE
+        for position, weight in sorted(zip(stone_positions, stone_weights), key=lambda x: tuple(x[0])):
+            map[tuple(position)] = STONE if map[tuple(position)] != SWITCH else STONE_SWITCH
             display_weights.append(int(weight))
         
         string = ''

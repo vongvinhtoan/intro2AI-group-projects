@@ -27,24 +27,24 @@ class Environment:
         lines = lines[1:]
 
         self.map_layer = np.array([list(line[:-1]) for line in lines])
-        for row, col in itertools.product(range(len(self.map_layer)), range(len(self.map_layer[0]))):
-            if self.map_layer[row, col] in [AGENT, STONE]:
-                if self.map_layer[row, col] == AGENT:
-                    initial_state.agent_position = (row, col)
-                if self.map_layer[row, col] == STONE:
-                    initial_state.stone_positions.append((row, col))
-                if self.map_layer[row, col] == SWITCH:
-                    self.switch_positions.append((row, col))
-                self.map_layer[row, col] = EMPTY
-            elif self.map_layer[row, col] in [AGENT_SWITCH, STONE_SWITCH]:
-                if self.map_layer[row, col] == AGENT_SWITCH:
-                    initial_state.agent_position = (row, col)
-                if self.map_layer[row, col] == STONE_SWITCH:
-                    initial_state.stone_positions.append((row, col))
-                self.map_layer[row, col] = SWITCH
+        for position in itertools.product(range(len(self.map_layer)), range(len(self.map_layer[0]))):
+            if self.map_layer[position] in [AGENT, STONE]:
+                if self.map_layer[position] == AGENT:
+                    initial_state.agent_position = position
+                elif self.map_layer[position] == STONE:
+                    initial_state.stone_positions.append(position)
+                elif self.map_layer[position] == SWITCH:
+                    self.switch_positions.append(position)
+                self.map_layer[position] = EMPTY
+            elif self.map_layer[position] in [AGENT_SWITCH, STONE_SWITCH]:
+                if self.map_layer[position] == AGENT_SWITCH:
+                    initial_state.agent_position = position
+                elif self.map_layer[position] == STONE_SWITCH:
+                    initial_state.stone_positions.append(position)
+                self.map_layer[position] = SWITCH
             
-            if self.map_layer[row, col] == SWITCH:
-                self.switch_positions.append((row, col))
+            if self.map_layer[position] == SWITCH:
+                self.switch_positions.append(position)
 
         initial_state.stone_positions = np.array(initial_state.stone_positions, dtype=np.int32)
         initial_state.agent_position  = np.array(initial_state.agent_position, dtype=np.int32)
