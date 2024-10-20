@@ -1,48 +1,104 @@
 import pygame
-import sys
+import numpy as np
 
 from ..root.scene_node import SceneNode
 from ..root.transform import Transform
 
+from visualize.component.root import TextureHolder, FontHolder
+from problem import Problem, SearchState
+from problem.environment import *
+
 class BoardView(SceneNode):
-    def __init__(self, position, cellSize, numRow, numCol, textureHolder, fontHolder):
+    def __init__(self, position: tuple[int], drawSize: tuple[int], problem: Problem, solution: str, textureHolder: TextureHolder, fontHolder: FontHolder):
         super().__init__()
         self.transform = Transform(position)
-        self.numRow = numRow
-        self.numCol = numCol
-        self.cellSize = cellSize
-        self.textureHolder = textureHolder
-        self.fontHolder = fontHolder
 
-        print("BoardView: ", self.numRow, self.numCol)
-        self.board = [[0 for x in range(self.numCol)] for y in range(self.numRow)]
-        self.weight = [[0 for x in range(self.numCol)] for y in range(self.numRow)]
+        self.numRow = problem.environment.shape[0]
+        self.numCol = problem.environment.shape[1]
+        
+        self.problem = problem
+        self.state = problem.initial_state
+        self.boardName = solution["name"]
+        self.solution = solution["move"].lower()
 
-    def set_board(self, board, weight):
-        self.board = board
-        self.weight = weight
+        self.statusRect = pygame.Rect(0, drawSize[1]-50, drawSize[0], 50)
 
-    def draw(self, surface, global_transform):
-        for layer in self.board:
-            for y in range(self.numRow):
-                for x in range(self.numCol):
-                    cell = layer[y][x]
-                    image = pygame.transform.scale(self.textureHolder.get(cell), (self.cellSize, self.cellSize))
-                    rect = pygame.Rect(x * self.cellSize, y * self.cellSize, self.cellSize, self.cellSize)
-                    surface.blit(image, global_transform.transform_rect(rect))
+        self.cellSize = min(drawSize[0] // self.numCol, (drawSize[1]-self.statusRect.size[1]) // self.numRow)
+        self.cellRect = pygame.Rect(0, 0, self.cellSize, self.cellSize)
 
-        def draw_rounded_rect(surface, color, rect, corner_radius):
-            shape_surf = pygame.Surface((rect.width, rect.height), pygame.SRCALPHA)  # Use SRCALPHA for transparency
-            pygame.draw.rect(shape_surf, color, shape_surf.get_rect(), border_radius=corner_radius)
-            surface.blit(shape_surf, rect.topleft)
+        self.sprite = {
+            EMPTY: pygame.transform.scale(textureHolder.get(EMPTY), (self.cellSize, self.cellSize)),
+            AGENT: pygame.transform.scale(textureHolder.get(AGENT), (self.cellSize, self.cellSize)),
+            STONE: pygame.transform.scale(textureHolder.get(STONE), (self.cellSize, self.cellSize)),
+            WALL: pygame.transform.scale(textureHolder.get(WALL), (self.cellSize, self.cellSize)),
+            SWITCH: pygame.transform.scale(textureHolder.get(SWITCH), (self.cellSize, self.cellSize))
+        }
+        self.font = fontHolder.get("default")
 
+        self.background = pygame.Surface((self.numCol * self.cellSize, self.numRow * self.cellSize))
         for y in range(self.numRow):
             for x in range(self.numCol):
-                if self.weight[y][x] != 0:
-                    text = self.fontHolder.get("default").render(str(self.weight[y][x]), True, (255, 255, 255))
-                    rect = text.get_rect()
-                    rect.center = (x * self.cellSize + self.cellSize/2, y * self.cellSize + self.cellSize/2)
-                    round_rect = rect.inflate(10, 10)
-                    # pygame.draw.rect(surface, (255,255,255,200), rect.inflate(10, 10), border_radius=20)
-                    draw_rounded_rect(surface, (0,0,0,128), round_rect, 20)
-                    surface.blit(text, global_transform.transform_rect(rect))
+                self.cellRect.topleft = (x * self.cellSize, y * self.cellSize)
+                self.background.blit(self.sprite[self.problem.environment.map_layer[y,x]], self.cellRect.topleft)
+
+        self.timeStep = 1
+        self.timeCounter = 0
+        self.currentStep = 0
+        self.numSteps = len(self.solution)
+        self.cost = 0
+
+    def size(self):
+        return (self.numCol * self.cellSize, self.numRow * self.cellSize)
+
+    def update(self, dt: float) -> None:
+        self.timeCounter += dt
+        if self.timeCounter > self.timeStep:
+            self.timeCounter -= self.timeStep
+
+            if self.currentStep < self.numSteps:
+                actions = self.problem.actions(self.state)
+                action = self.solution[self.currentStep]
+                for a in actions:
+                    if a.action == action:
+                        self.state, cost = self.problem.result(self.state, a)
+                        self.cost += cost
+                        break
+                self.currentStep += 1
+
+    def __draw_rounded_rect(self, surface, color, rect, corner_radius):
+        shape_surf = pygame.Surface((rect.width, rect.height), pygame.SRCALPHA)  # Use SRCALPHA for transparency
+        pygame.draw.rect(shape_surf, color, shape_surf.get_rect(), border_radius=corner_radius)
+        surface.blit(shape_surf, rect.topleft)
+
+    def draw(self, surface, global_transform):
+        # Draw background
+        surface.blit(self.background, global_transform.transform_point(pygame.Vector2(0, 0)))
+
+        # Draw agent
+        self.cellRect.center = (self.state.agent_position[1] * self.cellSize + self.cellSize/2, self.state.agent_position[0] * self.cellSize + self.cellSize/2)
+        surface.blit(self.sprite[AGENT], global_transform.transform_rect(self.cellRect))
+
+        # Draw stones
+        for position, weight in zip(self.state.stone_positions, self.problem.environment.stone_weights):
+            self.cellRect.center = (position[1] * self.cellSize + self.cellSize/2, position[0] * self.cellSize + self.cellSize/2)
+            surface.blit(self.sprite[STONE], global_transform.transform_rect(self.cellRect))
+            
+            text = self.font.render(str(weight), True, (255, 255, 255))
+            rect = text.get_rect()
+            rect.center = (position[1] * self.cellSize + self.cellSize // 2, position[0] * self.cellSize + self.cellSize // 2)
+            rect = global_transform.transform_rect(rect)
+            round_rect = rect.inflate(10, 10)
+            self.__draw_rounded_rect(surface, (0,0,0,128), round_rect, 20)
+            surface.blit(text, rect)
+
+        # Draw status bar
+        textLeft = self.font.render(f"{self.boardName}", True, (255, 255, 255))
+        textRight = self.font.render(f"Step: {self.currentStep}/{self.numSteps} Cost: {self.cost}", True, (255, 255, 255))
+        
+        rect = textLeft.get_rect()
+        rect.topleft = (10, 10)
+        surface.blit(textLeft, global_transform.transform_rect(rect).move(0, self.statusRect.top))
+
+        rect = textRight.get_rect()
+        rect.topright = (self.size()[0]-10, 10)
+        surface.blit(textRight, global_transform.transform_rect(rect).move(0, self.statusRect.top))

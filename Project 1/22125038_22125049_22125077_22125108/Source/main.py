@@ -21,15 +21,19 @@ def main():
         for input_file, output_file in zip(input_files, output_files):
             input_stream = open(input_file, 'r')
             output_stream = open(output_file, 'w')
-            yield input_stream, output_stream
+            yield input_stream, output_stream, input_file, output_file
     
-    for input_stream, output_stream in file_streams(input_files, output_files):
+    for input_stream, output_stream, input_file, output_file in file_streams(input_files, output_files):
+        print()
+        print(f"Processing {input_file} ---> {output_file}...")
+        print()
         problem = Problem()
         problem.parse_input(input_stream)
 
         for solver in solvers:
             output = solver.solve(problem)
             output_stream.write(str(output) + '\n')
+
 
 if __name__ == '__main__':
     main()

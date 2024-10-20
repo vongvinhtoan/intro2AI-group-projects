@@ -36,8 +36,6 @@ class Environment:
                     agent_position = position
                 elif self.map_layer[position] == STONE:
                     stone_positions.append(position)
-                elif self.map_layer[position] == SWITCH:
-                    self.switch_positions.append(position)
                 self.map_layer[position] = EMPTY
             elif self.map_layer[position] in [AGENT_SWITCH, STONE_SWITCH]:
                 if self.map_layer[position] == AGENT_SWITCH:

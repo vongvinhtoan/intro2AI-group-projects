@@ -2,9 +2,9 @@ import pygame
 from .scene_node import SceneNode
 
 class GameEngine:
-    def __init__(self, width, height, title):
+    def __init__(self, size, title):
         pygame.init()
-        self.screen = pygame.display.set_mode((width, height))
+        self.screen = pygame.display.set_mode(size)
         pygame.display.set_caption(title)
         self.clock = pygame.time.Clock()
         self.running = True
