@@ -5,8 +5,8 @@ def parse_args():
     import argparse
     return {
         'strategies': ['DFS', 'BFS', 'UCS', 'A*'],
-        'input_files': ['input-01.txt'],
-        'output_files': ['output-01.txt']
+        'input_files': ['input-01.txt', 'input-02.txt'],
+        'output_files': ['output-01.txt', 'output-02.txt']
     }
 
 def main():

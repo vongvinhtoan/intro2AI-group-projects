@@ -14,5 +14,7 @@ class Strategy_A_star(SearchStrategy):
 
         node = SearchNode(problem.initial_state)
         
+        import time
+        time.sleep(3)
         
         return node
