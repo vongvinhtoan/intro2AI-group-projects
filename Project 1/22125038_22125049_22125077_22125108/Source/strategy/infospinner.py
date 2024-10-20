@@ -25,7 +25,7 @@ class InfoSpinner:
             while self.running:
                 self.elapsed_time = time.time() - self.start_time
                 _, peak = tracemalloc.get_traced_memory()
-                sys.stdout.write(f"{spinner_chars[i % len(spinner_chars)]} Elapsed: \033[92m{self.elapsed_time:.2f} sec\033[0m, Generated: \033[92m{SearchNode.node_count} nodes\033[0m, Memory used: \033[92m{peak / 10**6:.2f} MB\033[0m" + " " * 10 + "\r")
+                sys.stdout.write(f"{spinner_chars[i % len(spinner_chars)]} Elapsed: \033[93m{self.elapsed_time:.2f} sec\033[0m, Generated: \033[93m{SearchNode.node_count} nodes\033[0m, Memory used: \033[93m{peak / 10**6:.2f} MB\033[0m" + " " * 10 + "\r")
                 sys.stdout.flush()
                 i += 1
                 time.sleep(0.1)  # Control speed of spinner
