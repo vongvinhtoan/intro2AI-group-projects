@@ -47,7 +47,7 @@ class BoardView(SceneNode):
         self.numSteps = len(self.solution)
         self.cost = 0
 
-    def size(self):
+    def size(self) -> tuple[int]:
         return (self.numCol * self.cellSize, self.numRow * self.cellSize)
 
     def update(self, dt: float) -> None:
@@ -65,12 +65,12 @@ class BoardView(SceneNode):
                         break
                 self.currentStep += 1
 
-    def __draw_rounded_rect(self, surface, color, rect, corner_radius):
+    def __draw_rounded_rect(self, surface: pygame.Surface, color: tuple[int], rect: pygame.Rect, corner_radius: int) -> None:
         shape_surf = pygame.Surface((rect.width, rect.height), pygame.SRCALPHA)  # Use SRCALPHA for transparency
         pygame.draw.rect(shape_surf, color, shape_surf.get_rect(), border_radius=corner_radius)
         surface.blit(shape_surf, rect.topleft)
 
-    def draw(self, surface, global_transform):
+    def draw(self, surface: pygame.Surface, global_transform: Transform) -> None:
         # Draw background
         surface.blit(self.background, global_transform.transform_point(pygame.Vector2(0, 0)))
 
@@ -93,7 +93,7 @@ class BoardView(SceneNode):
 
         # Draw status bar
         textLeft = self.font.render(f"{self.boardName}", True, (255, 255, 255))
-        textRight = self.font.render(f"Step: {self.currentStep}/{self.numSteps} Cost: {self.cost}", True, (255, 255, 255))
+        textRight = self.font.render(f"Step: {self.currentStep}/{self.numSteps} - Cost: {self.cost}", True, (255, 255, 255))
         
         rect = textLeft.get_rect()
         rect.topleft = (10, 10)
