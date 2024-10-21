@@ -10,11 +10,9 @@ class Strategy_A_star(SearchStrategy):
         return "A*"
 
     def search(self, problem: Problem) -> SearchNode|None:
-        super().search(problem)
-
         node = SearchNode(problem.initial_state)
         
-        import time
-        time.sleep(3)
+        while True:
+            node = SearchNode(problem.initial_state)
         
         return node

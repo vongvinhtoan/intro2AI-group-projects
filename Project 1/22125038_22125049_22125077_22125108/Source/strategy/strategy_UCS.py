@@ -11,8 +11,6 @@ class Strategy_UCS(SearchStrategy):
         return "UCS"
 
     def search(self, problem: Problem) -> SearchNode|None:
-        super().search(problem)
-
         node = SearchNode(problem.initial_state)
         frontier : PriorityQueue[SearchNode] = PriorityQueue()
 

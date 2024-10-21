@@ -9,8 +9,6 @@ class Strategy_DFS(SearchStrategy):
         return "DFS"
 
     def search(self, problem: Problem) -> SearchNode|None:
-        super().search(problem)
-
         node = SearchNode(problem.initial_state)
         node = SearchNode(problem.initial_state)
         

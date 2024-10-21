@@ -30,6 +30,6 @@ class ProblemResult:
     def __str__(self):
         message = f"{self.strategy_name}"
         message += f"\nSteps: {self.numSteps}, Weight: {self.totalWeight}, Node: {self.numNodeGenerated}"
-        message += f", Time (ms): {self.time:.2f}, Memory (MB): {self.memory:.2f}"
+        message += f", Time (ms): {self.time*1000:.2f}, Memory (MB): {self.memory:.2f}"
         message += f"\n{self.solution}"
         return message
