@@ -80,10 +80,10 @@ class Problem:
 
         stone_positions = state.stone_positions
         goal_positions = self.environment.switch_positions
-        stone_weights = self.environment.stone_weights
-        cost_matrix = np.zeros((len(stone_positions), len(goal_positions)), dtype=np.int32)
+        stone_weights = self.environment.stone_weights + 1
+        cost_matrix = [[0 for _ in range(len(goal_positions))] for _ in range(len(stone_positions))]
         for i, stone_position in enumerate(stone_positions):
             for j, goal_position in enumerate(goal_positions):
-                cost_matrix[i, j] = manhattan(stone_position, goal_position) * stone_weights[i]
+                cost_matrix[i][j] = manhattan(stone_position, goal_position) * stone_weights[i]
 
         return minimum_cost_perfect_matching(cost_matrix)
