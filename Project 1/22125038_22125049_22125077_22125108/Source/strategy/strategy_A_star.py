@@ -12,6 +12,4 @@ class Strategy_A_star(SearchStrategy):
     def search(self, problem: Problem) -> SearchNode|None:
         node = SearchNode(problem.initial_state)
         
-        
-        
-        return node
+        return None

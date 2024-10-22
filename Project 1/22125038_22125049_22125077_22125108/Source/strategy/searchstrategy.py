@@ -64,8 +64,8 @@ class SearchStrategy:
         self._user_interrupted = False
         SearchNode.clear()
         self._start_time = time.time()
-        tracemalloc.start()
         self._info_spinner.start(self._start_time)
+        tracemalloc.start()
 
     def _monitor_check(self, time_limit: float, memory_limit: int):
         _, peak = tracemalloc.get_traced_memory()
