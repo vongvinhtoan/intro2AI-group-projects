@@ -16,7 +16,7 @@ class SearchStrategy:
     def search(self, problem: Problem) -> SearchNode|None:
         pass
 
-    def solve(self, problem: Problem, time_limit: float = -1, memory_limit: float = 500) -> ProblemResult:
+    def solve(self, problem: Problem, time_limit: float = -1, memory_limit: float = -1) -> ProblemResult:
         print("="*20 + f"\n{str(self)} search")
 
         self._monitor_reset()
