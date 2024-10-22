@@ -17,7 +17,7 @@ class Strategy_UCS(SearchStrategy):
         frontier.put(node)
         reached = {node.state: node}
 
-        while frontier:
+        while not frontier.empty():
             node = frontier.get()
             
             if problem.is_goal(node.state):

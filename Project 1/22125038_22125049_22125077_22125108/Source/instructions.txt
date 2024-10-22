@@ -1,1 +1,1 @@
--s .* -ir input-(0(?!3)[1-9]|10)\.txt -or output-(0[1-9]|10)\.txt -TL 5
+-s .* -ir input-(0[1-9]|10)\.txt -or output-(0[1-9]|10)\.txt -TL 5

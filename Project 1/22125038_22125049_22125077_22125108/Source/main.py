@@ -21,9 +21,7 @@ def run_solver(args):
                 output_stream = open(output_file, 'w')
                 yield input_stream, output_stream
         if input_regex is not None and output_regex is not None: 
-            print(input_regex, output_regex)
             for input_file, output_file in zip(exrex.generate(input_regex), exrex.generate(output_regex)):
-                print(input_file, output_file)
                 if not re.fullmatch(input_regex, input_file) or not re.fullmatch(output_regex, output_file):
                     continue
                 input_stream = open(input_file, 'r')
