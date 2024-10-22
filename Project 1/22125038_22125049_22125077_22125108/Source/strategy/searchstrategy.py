@@ -16,7 +16,7 @@ class SearchStrategy:
     def search(self, problem: Problem) -> SearchNode|None:
         pass
 
-    def solve(self, problem: Problem, time_limit: float = 10, memory_limit: float = 500) -> ProblemResult:
+    def solve(self, problem: Problem, time_limit: float = -1, memory_limit: float = 500) -> ProblemResult:
         print("="*20 + f"\n{str(self)} search")
 
         self._monitor_reset()
@@ -65,9 +65,9 @@ class SearchStrategy:
 
     def _monitor_check(self, time_limit: float, memory_limit: int):
         _, peak = tracemalloc.get_traced_memory()
-        if time.time() - self._start_time > time_limit:
+        if time.time() - self._start_time > time_limit and time_limit > 0:
             self._time_limit_exceeded = True
-        if peak / 10**6 > memory_limit:
+        if peak / 10**6 > memory_limit and memory_limit > 0:
             self._memory_limit_exceeded = True
 
     def __str__(self):
