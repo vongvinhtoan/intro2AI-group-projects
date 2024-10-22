@@ -1,6 +1,5 @@
 import time
 import threading
-import sys
 from problem.searchnode import SearchNode
 import tracemalloc
 from enum import Enum
@@ -26,7 +25,7 @@ class InfoSpinner:
     def start(self, start_time):
         self.running = True
         self.start_time = start_time
-        self.thread = threading.Thread(target=self._spin)
+        self.thread = threading.Thread(target=self._spin, daemon=True)
         self.thread.start()
     
     def elapsed_info(self, color1, color2 = None, color3 = None):

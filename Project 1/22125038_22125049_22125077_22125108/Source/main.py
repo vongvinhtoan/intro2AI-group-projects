@@ -3,13 +3,14 @@ from strategy import *
 from utils import parse_args
 import exrex, re
 
-def main():
-    args = parse_args()
+def run_solver(args):
     strategies = args['strat']
     input_files = args['in']
     output_files = args['out']
     input_regex = args['inregex']
     output_regex = args['outregex']
+    time_limit = args['time_limit']
+    memory_limit = args['memory_limit']
 
     solvers = [solver for name, solver in solver_dict.items() if re.fullmatch('|'.join(strategies), name)]
 
@@ -23,6 +24,8 @@ def main():
             print(input_regex, output_regex)
             for input_file, output_file in zip(exrex.generate(input_regex), exrex.generate(output_regex)):
                 print(input_file, output_file)
+                if not re.fullmatch(input_regex, input_file) or not re.fullmatch(output_regex, output_file):
+                    continue
                 input_stream = open(input_file, 'r')
                 output_stream = open(output_file, 'w')
                 yield input_stream, output_stream
@@ -35,8 +38,18 @@ def main():
         problem.parse_input(input_stream)
 
         for solver in solvers:
-            output = solver.solve(problem)
+            output = solver.solve(problem, time_limit, memory_limit)
             output_stream.write(str(output) + '\n')
+
+def main():
+    args = parse_args()
+    if args['file'] is None:
+        run_solver(args)
+    else:
+        with open(args['file'], 'r') as f:
+            for line in f:
+                args = parse_args(line.split())
+                run_solver(args)
 
 
 if __name__ == '__main__':
