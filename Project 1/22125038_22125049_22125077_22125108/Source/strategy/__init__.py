@@ -10,7 +10,7 @@ solver_dict : dict[str, SearchStrategy] = {
     'DFS': DFS_solver,
     'BFS': BFS_solver,
     'UCS': UCS_solver,
-    'A*': A_star_solver
+    'A_star': A_star_solver
 }
 
 __all__ = [

@@ -3,6 +3,8 @@ from .environment import *
 from .searchstate import SearchState
 from .searchnode import SearchNode
 from .searchaction import Action, action_map
+import numpy as np
+from munkres import Munkres
 
 class Problem:
     def __init__(self):
@@ -68,3 +70,20 @@ class Problem:
         string += str(display_weights) + '\n'
         string += '\n'.join([''.join(row) for row in map])
         return string
+    
+    def heuristic(self, state: SearchState) -> int:
+        def manhattan(a: np.ndarray, b: np.ndarray) -> int:
+            return np.sum(np.abs(a - b))
+        
+        def minimum_cost_perfect_matching(cost_matrix):
+            return sum(cost_matrix[i][j] for i, j in Munkres().compute(cost_matrix))
+
+        stone_positions = state.stone_positions
+        goal_positions = self.environment.switch_positions
+        stone_weights = self.environment.stone_weights
+        cost_matrix = np.zeros((len(stone_positions), len(goal_positions)), dtype=np.int32)
+        for i, stone_position in enumerate(stone_positions):
+            for j, goal_position in enumerate(goal_positions):
+                cost_matrix[i, j] = manhattan(stone_position, goal_position) * stone_weights[i]
+
+        return minimum_cost_perfect_matching(cost_matrix)

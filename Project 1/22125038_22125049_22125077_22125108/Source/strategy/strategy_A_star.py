@@ -1,6 +1,6 @@
 from .searchstrategy import SearchStrategy
 from problem import *
-from queue import PriorityQueue
+from . import best_first_search
 
 class Strategy_A_star(SearchStrategy):
     def __init__(self):
@@ -10,6 +10,4 @@ class Strategy_A_star(SearchStrategy):
         return "A*"
 
     def search(self, problem: Problem) -> SearchNode|None:
-        node = SearchNode(problem.initial_state)
-        
-        return None
+        return best_first_search.search(problem, lambda node: node.path_cost + problem.heuristic(node.state))

@@ -1,6 +1,6 @@
 from .searchstrategy import SearchStrategy
-from utils import PriorityQueue
 from problem import *
+from . import best_first_search
 
 class Strategy_UCS(SearchStrategy):
     def __init__(self):
@@ -10,24 +10,4 @@ class Strategy_UCS(SearchStrategy):
         return "UCS"
 
     def search(self, problem: Problem) -> SearchNode|None:
-        node = SearchNode(problem.initial_state)
-        frontier : PriorityQueue[SearchNode] = PriorityQueue(priority=lambda x: x.path_cost)
-
-        frontier.put(node)
-        reached = {node.state: node}
-
-        while not frontier.empty():
-            node = frontier.get()
-            
-            if problem.is_goal(node.state):
-                return node
-            
-            if reached[node.state].path_cost < node.path_cost:
-                continue
-
-            for child in problem.expand(node):
-                s = child.state
-                if s not in reached or child.path_cost < reached[s].path_cost:
-                    reached[s] = child
-                    frontier.put(child)
-        return None
+        return best_first_search.search(problem, lambda node: node.path_cost)
