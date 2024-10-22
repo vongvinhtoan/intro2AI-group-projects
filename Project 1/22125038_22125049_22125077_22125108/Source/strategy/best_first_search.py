@@ -22,4 +22,5 @@ def search(problem: Problem, f: Callable[[SearchNode], int]) -> SearchNode|None:
             if s not in reached.keys() or f(child) < f(reached[s]):
                 reached[s] = child
                 frontier.put(child)
+
     return None
