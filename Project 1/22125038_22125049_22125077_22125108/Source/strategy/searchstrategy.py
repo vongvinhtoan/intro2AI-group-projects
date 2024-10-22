@@ -44,6 +44,10 @@ class SearchStrategy:
                     self._info_spinner.stop(SpinnerStopCode.MLE)
                 elif self._user_interrupted:
                     self._info_spinner.stop(SpinnerStopCode.INTERRUPTED)
+            except Exception as e:
+                self._info_spinner.stop(SpinnerStopCode.ERROR)
+                print(e)
+                raise e
         
         _, peak = tracemalloc.get_traced_memory()
         tracemalloc.stop()

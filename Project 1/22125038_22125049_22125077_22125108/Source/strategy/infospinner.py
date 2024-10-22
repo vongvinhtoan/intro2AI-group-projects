@@ -13,6 +13,7 @@ class SpinnerStopCode(Enum):
     FINISHED = 2
     TLE = 3
     MLE = 4
+    ERROR = 5
 
 class InfoSpinner:
 
@@ -66,3 +67,5 @@ class InfoSpinner:
             print(f"{self.elapsed_info(Fore.MAGENTA, Fore.RED)}\n{Fore.RED}Time limit exceeded.{Style.RESET_ALL}")
         elif stop_code == SpinnerStopCode.MLE:
             print(f"{self.elapsed_info(Fore.RED, Fore.RED, Fore.MAGENTA)}\n{Fore.RED}Memory limit exceeded.{Style.RESET_ALL}")
+        elif stop_code == SpinnerStopCode.ERROR:
+            print(f"{self.elapsed_info(Fore.RED)}\n{Fore.RED}Error occurred.{Style.RESET_ALL}")
