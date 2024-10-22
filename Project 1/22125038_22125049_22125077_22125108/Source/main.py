@@ -11,8 +11,6 @@ def main():
     input_regex = args['inregex']
     output_regex = args['outregex']
 
-    print(list(exrex.generate('a[1-3]b')))
-
     solvers = [solver for name, solver in solver_dict.items() if re.fullmatch('|'.join(strategies), name)]
 
     def file_streams():
