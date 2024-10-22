@@ -35,9 +35,9 @@ class SearchStrategy:
                 self._info_spinner.stop(SpinnerStopCode.FINISHED)
             except KeyboardInterrupt:
                 self._user_interrupted = True
-                SearchNode.block() 
+                SearchNode.block()
                 self._info_spinner.stop(SpinnerStopCode.INTERRUPTED)
-            except SearchException:
+            except SearchException as e:
                 if self._time_limit_exceeded:
                     self._info_spinner.stop(SpinnerStopCode.TLE)
                 elif self._memory_limit_exceeded:

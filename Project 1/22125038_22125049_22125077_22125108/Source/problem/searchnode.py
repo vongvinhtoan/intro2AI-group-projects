@@ -18,7 +18,7 @@ class SearchNode:
 
     def __init__(self, state: SearchState, parent: 'SearchNode' = None, action: Action = None, path_cost: int = 0):
         if not SearchNode.allow_creation.is_set():
-            raise SearchException("SearchNode creation is not allowed")
+            raise SearchException("SearchNode creation is not blocked")
         self.state = state
         self.parent = parent
         self.action = action
