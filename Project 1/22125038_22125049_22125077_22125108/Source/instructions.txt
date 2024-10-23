@@ -1,1 +1,1 @@
--s .* -ir input-(0[1-9]|10)\.txt -or output-(0[1-9]|10)\.txt -TL 100
+-s .* -ir inputs/input-(0[1-9]|10)\.txt -or outputs/output-(0[1-9]|10)\.txt -sor solutions/solution-(0[1-9]|10)\.json -TL 100
