@@ -9,17 +9,23 @@ from problem import Problem, SearchState
 from problem.environment import *
 
 class BoardView(SceneNode):
-    def __init__(self, position: tuple[int], drawSize: tuple[int], problem: Problem, solution: str, textureHolder: TextureHolder, fontHolder: FontHolder):
+    def __init__(self, position: tuple[int], drawSize: tuple[int], problem: Problem, solution: dict, textureHolder: TextureHolder, fontHolder: FontHolder):
         super().__init__()
         self.transform = Transform(position)
+
 
         self.numRow = problem.environment.shape[0]
         self.numCol = problem.environment.shape[1]
         
         self.problem = problem
         self.state = problem.initial_state
-        self.boardName = solution["name"]
-        self.solution = solution["move"].lower()
+
+        self.boardName = solution["strategy_name"]
+        self.has_solution = solution["has_solution"]
+        if solution["has_solution"]:
+            self.solution = solution["solution"].lower()
+        else:
+            self.solution = ""
 
         self.statusRect = pygame.Rect(0, drawSize[1]-50, drawSize[0], 50)
 
@@ -41,6 +47,9 @@ class BoardView(SceneNode):
                 self.cellRect.topleft = (x * self.cellSize, y * self.cellSize)
                 self.background.blit(self.sprite[self.problem.environment.map_layer[y,x]], self.cellRect.topleft)
 
+        self.drawSize = (min(drawSize[0], self.numCol * self.cellSize), min(drawSize[1], self.numRow * self.cellSize + self.statusRect.size[1]))
+        self.statusRect.topleft = (0, self.drawSize[1] - self.statusRect.size[1])
+
         self.timeStep = 1
         self.timeCounter = 0
         self.currentStep = 0
@@ -48,7 +57,7 @@ class BoardView(SceneNode):
         self.cost = 0
 
     def size(self) -> tuple[int]:
-        return (self.numCol * self.cellSize, self.numRow * self.cellSize)
+        return self.drawSize
 
     def update(self, dt: float) -> None:
         self.timeCounter += dt
@@ -83,8 +92,8 @@ class BoardView(SceneNode):
             self.cellRect.center = (position[1] * self.cellSize + self.cellSize/2, position[0] * self.cellSize + self.cellSize/2)
             surface.blit(self.sprite[STONE], global_transform.transform_rect(self.cellRect))
             
-            text = self.font.render(str(weight), True, (255, 255, 255))
-            rect = text.get_rect()
+            # text = self.font.render(str(weight), True, (255, 255, 255))
+            text, rect = self.font.render(text=str(weight), fgcolor=(255, 255, 255), size=self.cellSize*.5)
             rect.center = (position[1] * self.cellSize + self.cellSize // 2, position[0] * self.cellSize + self.cellSize // 2)
             rect = global_transform.transform_rect(rect)
             round_rect = rect.inflate(10, 10)
@@ -92,13 +101,14 @@ class BoardView(SceneNode):
             surface.blit(text, rect)
 
         # Draw status bar
-        textLeft = self.font.render(f"{self.boardName}", True, (255, 255, 255))
-        textRight = self.font.render(f"Step: {self.currentStep}/{self.numSteps} - Cost: {self.cost}", True, (255, 255, 255))
+        textLeft, rectLeft = self.font.render(text=f"{self.boardName}", fgcolor=(255, 255, 255))
+        if self.has_solution:
+            textRight, rectRight = self.font.render(text=f"Step: {self.currentStep}/{self.numSteps} - Cost: {self.cost}", fgcolor=(255, 255, 255))
+        else:
+            textRight, rectRight = self.font.render(text=f"No solution found", fgcolor=(255, 255, 255))
         
-        rect = textLeft.get_rect()
-        rect.topleft = (10, 10)
-        surface.blit(textLeft, global_transform.transform_rect(rect).move(0, self.statusRect.top))
+        rectLeft.topleft = (10, self.statusRect.height//2 - rectLeft.height//2)
+        surface.blit(textLeft, global_transform.transform_rect(rectLeft).move(self.statusRect.topleft))
 
-        rect = textRight.get_rect()
-        rect.topright = (self.size()[0]-10, 10)
-        surface.blit(textRight, global_transform.transform_rect(rect).move(0, self.statusRect.top))
+        rectRight.topright = (self.size()[0] - 10, self.statusRect.height//2 - rectRight.height//2)
+        surface.blit(textRight, global_transform.transform_rect(rectRight).move(0, self.statusRect.top))
