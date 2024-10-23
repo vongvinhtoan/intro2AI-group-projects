@@ -8,28 +8,20 @@ class Strategy_DFS(SearchStrategy):
 
     def __str__(self):
         return "DFS"
-
-    def is_cycle(node: SearchNode) -> bool:
-        current = node
-        states = set()
-        while current:
-            if current.state in states:
-                return True
-            states.add(current.state)
-            current = current.parent
-        return False
     
     def search(self, problem: Problem) -> SearchNode|None:
-        frontier = deque([SearchNode(problem.initial_state)])
-        result = "failure"
+        frontier : deque[SearchNode] = deque([SearchNode(problem.initial_state)])
+        visited : set[SearchState] = set()
+        visited.add(problem.initial_state)
 
         while frontier:
             node = frontier.pop()
+            assert node.state in visited
+            visited.remove(node.state)
             if problem.is_goal(node.state):
                 return node
-            if node.depth > limit:
-                result = "cutoff"
-            elif not self.is_cycle(node):
+            if node.state not in visited:
                 for child in problem.expand(node):
                     frontier.append(child)
-        return result
+                    visited.add(child.state)
+        return None
