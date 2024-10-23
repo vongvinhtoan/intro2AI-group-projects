@@ -25,3 +25,4 @@ class Strategy_DFS(SearchStrategy):
                     frontier.append(child)
                     visited.add(child.state)
         return None
+    
