@@ -42,7 +42,7 @@ Please write the test case overviews after designing the test cases below.
 | input-04  | 12    |  30   |     4      |  Moderate:  The large map with switches are next to each other in the centre of the maze.         |
 | input-05  |  13   |  35   |    5       |  Hard: Four switches are to the corners of the map while the remaining one is in the centre. Additionally, there are two rocks next to each other, requiring the agent to choose an appropriate solution           |
 | input-06  |  6 | 12   | 2          |  Easy: Clear path from rocks to switches.       |
-| input-07  |   9 |7    | 4          |  Moderate: One rock pre-placed on incorrect switch. Initial maneuvering required for two rocks, remaining steps are straightforward.       |
+| input-07  |   7 |9    | 4          |  Moderate: One rock pre-placed on incorrect switch. Initial maneuvering required for two rocks, remaining steps are straightforward.       |
 | input-08  |   7  | 12    |      3     |   Hard: Narrow maze with three rocks (two adjacent, two near a wall), requiring careful maneuvering.          |
 | input-09  |  7  |   9 |      6     |   Hard: Narrow maze with six rocks. Four rocks are incorrectly positioned on switches, and two completely block the path. Rocks cannot be pushed all the way, requiring careful maneuvering and strategic placement to create space to reach other rocks.          |
 | input-10  |  11   | 20    |    1       |   Hard: Even though there is only one stone and switch and they are only separated by a wall, there is no answer for this case. This is because walls are designed to create a loop path that curbs the agent from reaching the solution           |
