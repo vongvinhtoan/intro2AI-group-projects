@@ -3,40 +3,40 @@
         "strategy_name": "DFS",
         "numSteps": 0,
         "totalWeight": 0,
-        "numNodeGenerated": 1245991,
-        "time": 100.8226261138916,
-        "memory": 732.924105,
+        "numNodeGenerated": 634383,
+        "time": 101.52108860015869,
+        "memory": 353.460724,
         "solution": "No solution found",
         "has_solution": false
     },
     {
         "strategy_name": "BFS",
-        "numSteps": 0,
-        "totalWeight": 0,
-        "numNodeGenerated": 1273386,
-        "time": 93.48483514785767,
-        "memory": 327.525501,
-        "solution": "No solution found",
-        "has_solution": false
+        "numSteps": 20,
+        "totalWeight": 260,
+        "numNodeGenerated": 3625,
+        "time": 0.5908958911895752,
+        "memory": 0.958956,
+        "solution": "ruLdrrrdLLurrrrRRurD",
+        "has_solution": true
     },
     {
         "strategy_name": "UCS",
-        "numSteps": 0,
-        "totalWeight": 0,
-        "numNodeGenerated": 75,
-        "time": 1.3694093227386475,
-        "memory": 0.035269,
-        "solution": "No solution found",
-        "has_solution": false
+        "numSteps": 20,
+        "totalWeight": 260,
+        "numNodeGenerated": 2814,
+        "time": 0.5051419734954834,
+        "memory": 0.635058,
+        "solution": "ruLdrrrdLLrrrurRRurD",
+        "has_solution": true
     },
     {
         "strategy_name": "A*",
-        "numSteps": 0,
-        "totalWeight": 0,
-        "numNodeGenerated": 1208,
-        "time": 0.5582935810089111,
-        "memory": 0.332776,
-        "solution": "No solution found",
-        "has_solution": false
+        "numSteps": 20,
+        "totalWeight": 260,
+        "numNodeGenerated": 1036,
+        "time": 1.078817367553711,
+        "memory": 0.270644,
+        "solution": "rrrdLLuuLrrrrdrRRurD",
+        "has_solution": true
     }
 ]
