@@ -10,11 +10,13 @@ class ProblemResult:
         self.time = 0
         self.memory = 0
         self.solution = ""
+        self.has_solution = False
 
     def set_result(self, node: SearchNode, problem: Problem):
         if node is not None and problem.is_goal(node.state):
             self.totalWeight = node.path_cost
             self.solution = ""
+            self.has_solution = True
             while node is not None:
                 self.solution += f"{node.action}" if node.action is not None else ""
                 node = node.parent
@@ -33,3 +35,15 @@ class ProblemResult:
         message += f", Time (ms): {int(self.time*1000)}, Memory (MB): {self.memory:.2f}"
         message += f"\n{self.solution}"
         return message
+    
+    def __json__(self):
+        return {
+            "strategy_name": self.strategy_name,
+            "numSteps": int(self.numSteps),
+            "totalWeight": int(self.totalWeight),
+            "numNodeGenerated": int(self.numNodeGenerated),
+            "time": self.time,
+            "memory": self.memory,
+            "solution": self.solution,
+            "has_solution": self.has_solution
+        }

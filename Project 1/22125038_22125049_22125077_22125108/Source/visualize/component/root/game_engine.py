@@ -11,6 +11,9 @@ class GameEngine:
 
         self.root_node = SceneNode()
 
+    def set_window_size(self, size):
+        self.screen = pygame.display.set_mode(size)
+
     def add_node(self, node):
         self.root_node.add_child(node)
 

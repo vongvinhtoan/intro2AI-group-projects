@@ -19,9 +19,9 @@ def prepare_resources():
     return textureHolder, fontHolder
 
 def main(args):
-    windowSize = (1100, 800)
+    maxWindowSize = (1600, 900)
 
-    game = root.GameEngine(windowSize, "Game Engine")
+    game = root.GameEngine(maxWindowSize, "Game Engine")
 
     textureHolder, fontHolder = prepare_resources()
 
@@ -33,11 +33,15 @@ def main(args):
 
     assert len(solutions) <= 4, "Too many solutions"
 
-    boardView = [ui.BoardView((0, 0), (windowSize[0]//2,windowSize[1]//2), problem, sol, textureHolder, fontHolder) for sol in solutions]
+    boardView = [ui.BoardView((0, 0), (maxWindowSize[0]//2,maxWindowSize[1]//2), problem, sol, textureHolder, fontHolder) for sol in solutions]
+    padding = (50, 0)
 
     # 2x2 grid
     for i, bv in enumerate(boardView):
-        bv.transform.position = (i % 2 * windowSize[0] // 2 + (windowSize[0] // 2 - bv.size()[0]) // 2, i // 2 * windowSize[1] // 2)
+        # bv.transform.position = (i % 2 * bv.size()[0], i // 2 * bv.size()[1])
+        bv.transform.position = (i % 2 * (bv.size()[0] + padding[0]), i // 2 * (bv.size()[1] + padding[1]))
+
+    game.set_window_size((boardView[0].size()[0] * 2 + padding[0], boardView[0].size()[1] * 2 + padding[1]))
 
     for bv in boardView:
         game.add_node(bv)
