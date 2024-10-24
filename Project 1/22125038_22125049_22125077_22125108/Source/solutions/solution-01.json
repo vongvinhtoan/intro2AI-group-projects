@@ -27,7 +27,7 @@
         "time": 0.10770082473754883,
         "memory": 0.04986,
         "solution": "rrR",
-        "has_solution": true
+        "has_solution": false
     },
     {
         "strategy_name": "A*",
