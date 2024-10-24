@@ -1,12 +1,12 @@
 [
     {
         "strategy_name": "DFS",
-        "numSteps": 0,
-        "totalWeight": 0,
-        "numNodeGenerated": 7,
-        "time": 0.10270571708679199,
-        "memory": 0.021108,
-        "solution": "No solution found",
-        "has_solution": false
+        "numSteps": 37,
+        "totalWeight": 103,
+        "numNodeGenerated": 3463,
+        "time": 0.24715709686279297,
+        "memory": 0.847984,
+        "solution": "uuldddrruuurdddrUdluuRuldddrurdruuulD",
+        "has_solution": true
     }
 ]

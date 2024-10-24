@@ -1,10 +1,6 @@
+from typing import Generator
 from .searchstrategy import SearchStrategy
 from problem import *
-
-class DSFState:
-    def __init__(self, problem: Problem, node: SearchNode):
-        self.node = node
-        self.expand = problem.expand(node)
 
 class Strategy_DFS(SearchStrategy):
     def __init__(self):
@@ -14,21 +10,21 @@ class Strategy_DFS(SearchStrategy):
         return "DFS"
 
     def search(self, problem: Problem) -> SearchNode|None:
-        dfsStack: list[DSFState] = [DSFState(problem, SearchNode(problem.initial_state))]
+        node = SearchNode(problem.initial_state)
+        dfsStack: list[tuple[SearchNode, Generator[SearchNode, None, None]]] = [(node, problem.expand(node))]
         visited : set[SearchState] = {problem.initial_state}
 
         while len(dfsStack) > 0:
-            dfsState = dfsStack[-1]
-            print(problem.to_str(dfsState.node.state))
+            node, expand = dfsStack[-1]
             try:
-                child = next(dfsState.expand)
+                child = next(expand)
                 if problem.is_goal(child.state):
                     return child
                 if child.state not in visited:
                     visited.add(child.state)
-                    dfsStack.append(DSFState(problem, child))
+                    dfsStack.append((child, problem.expand(child)))
             except StopIteration:
-                # visited.remove(dfsState.node.state)
+                visited.remove(node.state)
                 dfsStack.pop()
                 
         return None
