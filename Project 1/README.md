@@ -37,6 +37,7 @@ Please write the test case overviews after designing the test cases below.
 | Test case | row | col | rockCount | description |
 | --------- | --- | --- | --------- | ----------- |
 <<<<<<< HEAD
+<<<<<<< HEAD
 | input-01  |  6   | 11    | 1          |   Easy: There is one stone in line with the agent and the switch           |
 | input-02  |  10   | 20    |   3        |   Hard: Switches are scattered in many directions on the map. Although two of them are surrounded by walls, complete paths are required to reach the solution.          |
 | input-03  |  8 | 12 | 2 | Moderate: Two stones are placed in a vertical line with two switches and there is only one way to push the rocks into the switches
@@ -45,6 +46,11 @@ Please write the test case overviews after designing the test cases below.
 | input-02  |  8   | 16    |   3        |   Hard: Switches are scattered in many directions on the map. Although two of them are surrounded by walls, complete paths are required to reach the solution.          |
 | input-03  |  8  | 11 | Moderate: Two stones are placed in a vertical line with two switches and there is only one way to push the rocks into the switches 
 >>>>>>> 38c84b436d66ce7b7e6046e3ba5ad846eddff54a
+=======
+| input-01  |  6   | 11    | 1          |   Easy: The agent, rock and switch are in a straight line without any obstacles           |
+| input-02  |  8   | 16    |   3        |   Hard: Switches are scattered in many directions on the map. Although two of them are surrounded by walls, complete paths are required to reach the solution.          |
+| input-03  |  8  | 11 | 2  |Moderate: Two stones are placed in a vertical line with two switches and there is only one way to push the rocks into the switches |
+>>>>>>> 52aa8788da3ec3e10db3d664ab753598ea232740
 | input-04  | 12    |  30   |     4      |  Moderate:  The large map with switches are next to each other in the centre of the maze.         |
 | input-05  |  13   |  35   |    5       |  Hard: Four switches are to the corners of the map while the remaining one is in the centre. Additionally, there are two rocks next to each other, requiring the agent to choose an appropriate solution           |
 | input-06  |  6 | 12   | 2          |  Easy: Clear path from rocks to switches.       |
