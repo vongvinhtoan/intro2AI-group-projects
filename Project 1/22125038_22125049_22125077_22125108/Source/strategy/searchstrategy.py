@@ -21,6 +21,7 @@ class SearchStrategy:
 
         self._monitor_reset()
 
+        verdict = "No solution found"
         result = ProblemResult()
         result.strategy_name = str(self)
         search_result = None
@@ -40,10 +41,13 @@ class SearchStrategy:
             except SearchException as e:
                 if self._time_limit_exceeded:
                     self._info_spinner.stop(SpinnerStopCode.TLE)
+                    verdict = "Time limit exceeded"
                 elif self._memory_limit_exceeded:
                     self._info_spinner.stop(SpinnerStopCode.MLE)
+                    verdict = "Memory limit exceeded"
                 elif self._user_interrupted:
                     self._info_spinner.stop(SpinnerStopCode.INTERRUPTED)
+                    verdict = "User interrupted"
             except Exception as e:
                 self._info_spinner.stop(SpinnerStopCode.ERROR)
                 print(e)
@@ -51,7 +55,7 @@ class SearchStrategy:
         
         _, peak = tracemalloc.get_traced_memory()
         tracemalloc.stop()
-        result.set_result(search_result, problem)
+        result.set_result(search_result, problem, verdict)
         result.time = time.time() - self._start_time
         result.memory = peak / 10**6
         result.numNodeGenerated = SearchNode.node_count

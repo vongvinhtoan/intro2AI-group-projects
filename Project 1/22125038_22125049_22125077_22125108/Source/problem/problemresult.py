@@ -12,7 +12,7 @@ class ProblemResult:
         self.solution = ""
         self.has_solution = False
 
-    def set_result(self, node: SearchNode, problem: Problem):
+    def set_result(self, node: SearchNode, problem: Problem, verdict: str = "No solution found"):
         if node is not None and problem.is_goal(node.state):
             self.totalWeight = node.path_cost
             self.solution = ""
@@ -24,7 +24,7 @@ class ProblemResult:
             self.solution = self.solution[::-1]
         else:
             if node is None:
-                self.solution = "No solution found"
+                self.solution = verdict
             elif not problem.is_goal(node.state):
                 self.solution = "Returned node is not a goal state"
         self.numNodeGenerated = SearchNode.node_count

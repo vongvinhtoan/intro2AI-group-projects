@@ -46,6 +46,7 @@ def run_solver(args):
         for solver in solvers:
             output = solver.solve(problem, time_limit, memory_limit)
             output_stream.write(str(output) + '\n')
+            output_stream.flush()
             result_list.append(output.__json__())
         solution_stream.write(json.dumps(result_list, indent=4))
 

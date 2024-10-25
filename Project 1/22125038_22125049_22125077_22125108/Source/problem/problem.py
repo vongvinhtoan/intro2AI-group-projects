@@ -3,8 +3,6 @@ from .environment import *
 from .searchstate import SearchState
 from .searchnode import SearchNode
 from .searchaction import Action, action_map
-import numpy as np
-from munkres import Munkres
 
 class Problem:
     def __init__(self):
@@ -20,20 +18,20 @@ class Problem:
                 return False
         return True
     
+    def is_valid_position(self, state: SearchState, direction: np.ndarray) -> bool:
+        position = state.agent_position.copy()
+        position += direction
+        if not (0 <= position[0] < self.environment.shape[0] and 0 <= position[1] < self.environment.shape[1]): return False, None
+        if self.environment[tuple(position)] == WALL: return False, None
+        if np.any(np.all(state.stone_positions == position, axis=1)):
+            if self.environment[tuple(position + direction)] == WALL: return False, None
+            if np.any(np.all(state.stone_positions == position+direction, axis=1)): return False, None
+            return True, True
+        return True, False
+    
     def actions(self, state: SearchState) -> Generator[Action, None, None]:
-        def is_valid_position(position: np.ndarray, direction: np.ndarray) -> bool:
-            position = position.copy()
-            position += direction
-            if not (0 <= position[0] < self.environment.shape[0] and 0 <= position[1] < self.environment.shape[1]): return False, None
-            if self.environment[tuple(position)] == WALL: return False, None
-            if np.any(np.all(state.stone_positions == position, axis=1)):
-                if self.environment[tuple(position + direction)] == WALL: return False, None
-                if np.any(np.all(state.stone_positions == position+direction, axis=1)): return False, None
-                return True, True
-            return True, False
-        
         for action, direction in action_map.items():
-            valid, to_push = is_valid_position(state.agent_position, direction)
+            valid, to_push = self.is_valid_position(state, direction)
             if valid:
                 yield Action(action, to_push)
 
@@ -70,20 +68,3 @@ class Problem:
         string += str(display_weights) + '\n'
         string += '\n'.join([''.join(row) for row in map])
         return string
-    
-    def heuristic(self, state: SearchState) -> int:
-        def manhattan(a: np.ndarray, b: np.ndarray) -> int:
-            return np.sum(np.abs(a - b))
-        
-        def minimum_cost_perfect_matching(cost_matrix):
-            return sum(cost_matrix[i][j] for i, j in Munkres().compute(cost_matrix))
-
-        stone_positions = state.stone_positions
-        goal_positions = self.environment.switch_positions
-        stone_weights = self.environment.stone_weights + 1
-        cost_matrix = [[0 for _ in range(len(goal_positions))] for _ in range(len(stone_positions))]
-        for i, stone_position in enumerate(stone_positions):
-            for j, goal_position in enumerate(goal_positions):
-                cost_matrix[i][j] = manhattan(stone_position, goal_position) * stone_weights[i]
-
-        return minimum_cost_perfect_matching(cost_matrix)
