@@ -26,6 +26,7 @@ class BoardView(SceneNode):
             self.solution = solution["solution"].lower()
         else:
             self.solution = ""
+            self.status = solution["solution"]
 
         self.statusRect = pygame.Rect(0, drawSize[1]-50, drawSize[0], 50)
 
@@ -50,11 +51,11 @@ class BoardView(SceneNode):
         self.drawSize = (min(drawSize[0], self.numCol * self.cellSize), min(drawSize[1], self.numRow * self.cellSize + self.statusRect.size[1]))
         self.statusRect.topleft = (0, self.drawSize[1] - self.statusRect.size[1])
 
-        self.timeStep = 1
         self.timeCounter = 0
         self.currentStep = 0
         self.numSteps = len(self.solution)
         self.cost = 0
+        self.timeStep = min(0.5, 15.0/(max(1,self.numSteps)))
 
     def size(self) -> tuple[int]:
         return self.drawSize
@@ -105,7 +106,7 @@ class BoardView(SceneNode):
         if self.has_solution:
             textRight, rectRight = self.font.render(text=f"Step: {self.currentStep}/{self.numSteps} - Cost: {self.cost}", fgcolor=(255, 255, 255))
         else:
-            textRight, rectRight = self.font.render(text=f"No solution found", fgcolor=(255, 255, 255))
+            textRight, rectRight = self.font.render(text=self.status, fgcolor=(255, 255, 255))
         
         rectLeft.topleft = (10, self.statusRect.height//2 - rectLeft.height//2)
         surface.blit(textLeft, global_transform.transform_rect(rectLeft).move(self.statusRect.topleft))
