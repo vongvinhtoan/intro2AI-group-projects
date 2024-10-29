@@ -18,20 +18,42 @@ class Problem:
                 return False
         return True
     
-    def is_valid_position(self, state: SearchState, direction: np.ndarray) -> bool:
+    def is_valid_position(self, position: np.ndarray) -> bool:
+        return (
+            0 <= position[0] < self.environment.shape[0] and 
+            0 <= position[1] < self.environment.shape[1] and 
+            self.environment[tuple(position)] != WALL
+        )
+
+    def is_valid_action(self, state: SearchState, direction: np.ndarray) -> bool:
         position = state.agent_position.copy()
         position += direction
-        if not (0 <= position[0] < self.environment.shape[0] and 0 <= position[1] < self.environment.shape[1]): return False, None
-        if self.environment[tuple(position)] == WALL: return False, None
+        if not self.is_valid_position(position): return False, None
         if np.any(np.all(state.stone_positions == position, axis=1)):
             if self.environment[tuple(position + direction)] == WALL: return False, None
             if np.any(np.all(state.stone_positions == position+direction, axis=1)): return False, None
             return True, True
         return True, False
     
+    def is_deadend(self, state: SearchState) -> bool:
+        # return False
+        for stone_position in state.stone_positions:
+            if self.environment[tuple(stone_position)] == SWITCH:
+                continue
+            ok = False
+            for direction in action_map.values():
+                if self.is_valid_position(stone_position + direction) and self.is_valid_position(stone_position - direction):
+                    ok = True
+                    break
+            if not ok:
+                return True
+        return False
+    
     def actions(self, state: SearchState) -> Generator[Action, None, None]:
+        if self.is_deadend(state):
+            return
         for action, direction in action_map.items():
-            valid, to_push = self.is_valid_position(state, direction)
+            valid, to_push = self.is_valid_action(state, direction)
             if valid:
                 yield Action(action, to_push)
 

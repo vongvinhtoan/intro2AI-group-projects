@@ -34,6 +34,8 @@ class Strategy_A_star(SearchStrategy):
         self.initialize(problem)
 
         def heuristic1(state: SearchState) -> int:
+            if problem.is_deadend(state):
+                return np.inf
             cost_matrix = [[
                     manhattan(stone_position, goal_position) * (problem.environment.stone_weights[i] + 1)
                     for goal_position in problem.environment.switch_positions
@@ -42,6 +44,8 @@ class Strategy_A_star(SearchStrategy):
             return minimum_cost_perfect_matching(cost_matrix)
         
         def heuristic2(state: SearchState) -> int:
+            if problem.is_deadend(state):
+                return float('inf')
             cost_matrix = [[
                     distance[tuple(stone_position)] * (problem.environment.stone_weights[i] + 1) 
                     for distance in self.distances
