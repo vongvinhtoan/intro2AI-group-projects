@@ -1,0 +1,42 @@
+[
+    {
+        "strategy_name": "DFS",
+        "numSteps": 0,
+        "totalWeight": 0,
+        "numNodeGenerated": 148819683,
+        "time": 36000.23054051399,
+        "memory": 0.50277,
+        "solution": "Time limit exceeded",
+        "has_solution": false
+    },
+    {
+        "strategy_name": "BFS",
+        "numSteps": 67,
+        "totalWeight": 298,
+        "numNodeGenerated": 7200161,
+        "time": 1559.947098016739,
+        "memory": 2651.325294,
+        "solution": "lullDRRullLulldRlddrURRRlllddrUluRlluurrDrrddLLURdldlUluRRlluurDurD",
+        "has_solution": true
+    },
+    {
+        "strategy_name": "UCS",
+        "numSteps": 67,
+        "totalWeight": 298,
+        "numNodeGenerated": 9868386,
+        "time": 2457.556671142578,
+        "memory": 3598.446102,
+        "solution": "lullDRRlulLulldRlddrURRRlllddrUluRlluurrDrrddLLURdldlUluRRlluurDurD",
+        "has_solution": true
+    },
+    {
+        "strategy_name": "A*",
+        "numSteps": 67,
+        "totalWeight": 298,
+        "numNodeGenerated": 1257335,
+        "time": 2324.583751678467,
+        "memory": 482.764514,
+        "solution": "lullDRRlluLulldRlddrURRRlllddrUluRlluurrDrrddLLURlddlUluRRlluurDurD",
+        "has_solution": true
+    }
+]
