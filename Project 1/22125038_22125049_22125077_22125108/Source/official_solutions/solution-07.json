@@ -3,40 +3,40 @@
         "strategy_name": "DFS",
         "numSteps": 0,
         "totalWeight": 0,
-        "numNodeGenerated": 212713393,
-        "time": 36000.235764980316,
-        "memory": 0.412384,
+        "numNodeGenerated": 137377739,
+        "time": 36000.238496780396,
+        "memory": 0.66877,
         "solution": "Time limit exceeded",
         "has_solution": false
     },
     {
         "strategy_name": "BFS",
-        "numSteps": 49,
-        "totalWeight": 263,
-        "numNodeGenerated": 405840,
-        "time": 74.42820715904236,
-        "memory": 148.821432,
-        "solution": "rrruulDrdLLuLDlddrrUdlluurDuurrdLulDllluurDRlldRR",
-        "has_solution": true
+        "numSteps": 0,
+        "totalWeight": 0,
+        "numNodeGenerated": 143814948,
+        "time": 31930.259231567383,
+        "memory": 51200.057548,
+        "solution": "Memory limit exceeded",
+        "has_solution": false
     },
     {
         "strategy_name": "UCS",
-        "numSteps": 49,
-        "totalWeight": 263,
-        "numNodeGenerated": 164746,
-        "time": 34.229475259780884,
-        "memory": 56.856984,
-        "solution": "rrruulDrdLLuLDlddrrUdlluurDuurrdLulDllluurDRlldRR",
-        "has_solution": true
+        "numSteps": 0,
+        "totalWeight": 0,
+        "numNodeGenerated": 158792789,
+        "time": 38712520.546286013425,
+        "memory": 21961.391315,
+        "solution": "Memory limit exceeded",
+        "has_solution": false
     },
     {
         "strategy_name": "A*",
-        "numSteps": 49,
-        "totalWeight": 263,
-        "numNodeGenerated": 27555,
-        "time": 35.692569971084595,
-        "memory": 10.0814,
-        "solution": "rrruulDrdLLuLDlddrrUdlluurDuurrdLulDllluurDRlldRR",
+        "numSteps": 59,
+        "totalWeight": 927,
+        "numNodeGenerated": 669309,
+        "time": 1172.979178905487,
+        "memory": 229.291959,
+        "solution": "ullddlluUruLLLrDDDrdLLrrrrrrrrrUdrrurURRllUluRRRRdDDullddrR",
         "has_solution": true
     }
 ]
