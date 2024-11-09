@@ -57,6 +57,8 @@ class BoardView(SceneNode):
         self.cost = 0
         self.timeStep = min(0.5, 15.0/(max(1,self.numSteps)))
 
+        self.agentFacingLeft = False
+
     def size(self) -> tuple[int]:
         return self.drawSize
 
@@ -72,6 +74,10 @@ class BoardView(SceneNode):
                     if a.action == action:
                         self.state, cost = self.problem.result(self.state, a)
                         self.cost += cost
+                        if action == 'l':
+                            self.agentFacingLeft = True
+                        elif action == 'r':
+                            self.agentFacingLeft = False
                         break
                 self.currentStep += 1
 
@@ -86,7 +92,7 @@ class BoardView(SceneNode):
 
         # Draw agent
         self.cellRect.center = (self.state.agent_position[1] * self.cellSize + self.cellSize/2, self.state.agent_position[0] * self.cellSize + self.cellSize/2)
-        surface.blit(self.sprite[AGENT], global_transform.transform_rect(self.cellRect))
+        surface.blit(pygame.transform.flip(self.sprite[AGENT], self.agentFacingLeft, False), global_transform.transform_rect(self.cellRect))
 
         # Draw stones
         for position, weight in zip(self.state.stone_positions, self.problem.environment.stone_weights):
