@@ -1,1 +1,0 @@
-# Use to validate the output, can be used with visualize.py
