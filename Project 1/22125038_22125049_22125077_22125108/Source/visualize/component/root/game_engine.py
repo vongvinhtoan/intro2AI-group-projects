@@ -11,6 +11,8 @@ class GameEngine:
 
         self.root_node = SceneNode()
 
+        self.is_paused = False
+
     def set_window_size(self, size):
         self.screen = pygame.display.set_mode(size)
 
@@ -22,7 +24,8 @@ class GameEngine:
             self.handle_events()
 
             dt = self.clock.tick(60) / 1000.0
-            self.root_node.update_all(dt)
+            if not self.is_paused:
+                self.root_node.update_all(dt)
 
             self.render()
 
@@ -32,6 +35,11 @@ class GameEngine:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.is_paused = not self.is_paused
+                elif event.key == pygame.K_ESCAPE:
+                    self.running = False
 
     def render(self):
         self.screen.fill((0, 0, 0))
