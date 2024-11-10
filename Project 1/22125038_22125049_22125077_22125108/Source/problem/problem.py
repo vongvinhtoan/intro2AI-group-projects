@@ -36,7 +36,6 @@ class Problem:
         return True, False
     
     def is_deadend(self, state: SearchState) -> bool:
-        # return False
         for stone_position in state.stone_positions:
             if self.environment[tuple(stone_position)] == SWITCH:
                 continue
