@@ -37,3 +37,7 @@ with zipfile.ZipFile(base_dir+".zip", 'w') as zipf:
             zipf.write(base_dir+"/Source/"+file, os.path.relpath(base_dir+"/Source/"+file, base_dir))
     if os.path.exists(base_dir+"/Report.pdf"):
         zipf.write(base_dir+"/Report.pdf", os.path.relpath(base_dir+"/Report.pdf", base_dir))
+
+print("Done")
+MB = 1024*1024
+print("File size:", os.path.getsize(base_dir+".zip")/MB, "MB")
