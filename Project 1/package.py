@@ -29,6 +29,7 @@ with zipfile.ZipFile(base_dir+".zip", 'w') as zipf:
         "main.py",
         "visualize.py",
         "requirements.txt",
+        "instructions.txt",
     ]
     for file in os.listdir(base_dir+"/Source"):
         # print(file)

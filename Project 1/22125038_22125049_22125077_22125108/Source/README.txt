@@ -24,3 +24,4 @@ To run visualization on a test, please run:
 ```
 python visualize.py --map ./input-01.txt --sol ./solutions/solution-01.json
 ```
+To escape the visualizer, please use Alt+F4
