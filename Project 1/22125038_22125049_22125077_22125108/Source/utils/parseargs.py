@@ -9,8 +9,8 @@ def parse_args(args=None):
     parser.add_argument('--inregex', '-ir', type=str, help='Regex for input files', default=None)
     parser.add_argument('--outregex', '-or', type=str, help='Regex for output files', default=None)
     parser.add_argument('--solregex', '-sor', type=str, help='Regex for solution files', default=None)
-    parser.add_argument('--time_limit', '-TL', type=int, help='Time limit for each strategy', default=-1)
-    parser.add_argument('--memory_limit', '-ML', type=int, help='Memory limit for each strategy', default=-1)
+    parser.add_argument('--time_limit', '-TL', type=int, help='Time limit for each strategy in seconds', default=-1)
+    parser.add_argument('--memory_limit', '-ML', type=int, help='Memory limit for each strategy in MB', default=-1)
     parser.add_argument('--file', '-f', type=str, help='File to read arguments from', default=None)
     if args is not None:
         return vars(parser.parse_args(args))
