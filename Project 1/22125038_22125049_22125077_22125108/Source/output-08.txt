@@ -1,0 +1,12 @@
+DFS
+Steps: 0, Cost: 0, Node: 214978733, Time (ms): 36000200, Memory (MB): 1.51
+Time limit exceeded
+BFS
+Steps: 117, Cost: 642, Node: 109068, Time (ms): 18483, Memory (MB): 38.62
+drrUdlluurRddllllluurRDullddrRdrUrruulLLddlluuRurDDullddrRuurrrRRdrruLLLLLLLddlluuRurDrrrddlLLrrruullDurrddldlluRuulD
+UCS
+Steps: 127, Cost: 582, Node: 78250, Time (ms): 15095, Memory (MB): 26.92
+drrUdlluurRllddllluurRDullddrRdrruruulLdlddrUllluururDDullddrRuurrrRRdrruLLLLLLrrddldllulluururDrrrddlLLrrruullDurrddldlluRuulD
+A*
+Steps: 127, Cost: 582, Node: 60063, Time (ms): 58349, Memory (MB): 21.25
+drrUdlluurRllddllluurRDullddrRdrruruulLdlddrUllluururDDullddrRuurrrRRdrruLLLLLLrrddldllulluururDrrrddlLLrrruullDurrddldlluRuulD

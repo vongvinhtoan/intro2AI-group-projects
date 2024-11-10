@@ -1,0 +1,12 @@
+DFS
+Steps: 0, Cost: 0, Node: 9324, Time (ms): 1335, Memory (MB): 3.88
+No solution found
+BFS
+Steps: 0, Cost: 0, Node: 3582, Time (ms): 496, Memory (MB): 1.45
+No solution found
+UCS
+Steps: 0, Cost: 0, Node: 1562, Time (ms): 284, Memory (MB): 0.59
+No solution found
+A*
+Steps: 0, Cost: 0, Node: 247, Time (ms): 247, Memory (MB): 0.12
+No solution found
