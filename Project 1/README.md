@@ -36,7 +36,7 @@ Test generation division:
 Please write the test case overviews after designing the test cases below.
 | Test case | row | col | rockCount | description |
 | --------- | --- | --- | --------- | ----------- |
-| input-01  |  6   | 11    | 1          |   Easy: There is one stone in line with the agent and the switch           |
+| input-01  |  4   | 11    | 1          |   Easy: There is one stone in line with the agent and the switch           |
 | input-02  |  6   | 12    |   2        |   Easy: Clear path from rocks to switches.          |
 | input-03  |  8 | 12 | 2 | Moderate: Two stones are placed in a vertical line with two switches and there is only one way to push the rocks into the switches
 | input-04  | 8    |  18   |     4      |  Moderate:  The large map with switches are next to each other in the centre of the maze.         |
