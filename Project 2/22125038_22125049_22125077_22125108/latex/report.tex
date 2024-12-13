@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{pgffor}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{pifont}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{fancyhdr}
+\usepackage{colortbl}
+\usepackage{multicol}
+\usepackage{longtable}
+\usepackage[vietnamese, english]{babel}
+\usepackage[a4paper, total={6in, 8in}, margin=1in]{geometry}
+\usepackage{styles/standard}
+
+\allowdisplaybreaks
+\setlength{\parindent}{0pt}
+\setlength{\headheight}{40pt}
+\setlength{\parskip}{0.3em}
+\renewcommand{\arraystretch}{1.6}
+
+\title{ \normalsize \textsc{}
+		\\ [2.0cm]
+        % \HRule{1.5pt} \\
+        \begin{tabular}{c@{\hskip 2cm}c}
+            \includegraphics[width=0.3\textwidth]{styles/logoHCMUS.png}
+            &
+            \includegraphics[width=0.3\textwidth]{styles/logoAPCS.png}
+        \end{tabular}
+        \vspace{2em} \\
+        \vspace{6pt}
+        \LARGE \textbf{\uppercase{CS420 -- Artificial Intelligence}} \\
+		\LARGE \textbf{Project 2 -- Decision Tree} \\
+        \Large \textbf{Report} \\
+        \vspace*{13\baselineskip}
+}
+\author{
+    VNUHCM-UNIVERSITY OF SCIENCE \\
+    \today
+}
+\date{}
+
+\pagestyle{fancy}
+\fancyhead[L]{\textbf{Project 2 -- Decision Tree}}
+\fancyhead[R]{\includegraphics[width=1.25cm]{styles/logoAPCS.png}}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+\selectlanguage{vietnamese}
+\thispagestyle{empty}
+\section*{Student Information}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Full Name} & \textbf{Student ID} \\ \hline 
+        Vòng Vĩnh Toàn & 22125108 \\ \hline
+        Nguyễn Hoàng Phúc & 22125077\\ \hline
+        Huỳnh Hà Phương Linh & 22125049\\ \hline
+        Huỳnh Đăng Khoa & 22125038 \\ 
+        \hline
+    \end{tabular}
+\end{table}
+\selectlanguage{english}
+\newpage
+
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+
+\setcounter{page}{1}
+\Section{Introduction}
+
+\include{dataset1}
+
+\include{dataset2}
+
+\include{dataset3}
+
+\newpage
+\Section{Conclusion}
+
+\Section{Self-evaluation}
+
+\end{document}

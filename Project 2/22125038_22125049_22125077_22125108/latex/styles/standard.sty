@@ -1,0 +1,66 @@
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+\newcommand{\Section}[1]{
+    \section*{#1}
+    \addcontentsline{toc}{section}{#1}
+}
+\newcommand{\Subsection}[1]{
+    \subsection*{#1}
+    \addcontentsline{toc}{subsection}{#1}
+}
+\newcommand{\Subsubsection}[1]{
+    \subsubsection*{#1}
+    \addcontentsline{toc}{subsubsection}{#1}
+}
+\newcommand{\inputsolution}[1]{
+
+    \IfFileExists{statements/#1.tex}{
+        \input{statements/#1}
+        
+    }
+    
+    \HRule{.5pt}
+    
+    \IfFileExists{solution/#1.tex}{
+        \input{solution/#1}
+    }
+    
+    \vspace{1em}
+}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{code}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=none,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=none
+}
+\lstdefinestyle{example}{
+    backgroundcolor=\color{white},
+    basicstyle=\ttfamily, 
+    breaklines=false, 
+    frame=single, 
+    showlines=true, 
+    showspaces=false,
+    numbers=none
+}
+\newcommand{\inputcodewithlines}[4] {
+    \lstinputlisting[style=code, language=#1, literate=~{$\sim$}2, firstline=#3, lastline=#4]{codes/#2}
+}
+\newcommand{\inputcode}[2] {
+    \lstinputlisting[style=code, language=#1, literate=~{$\sim$}2]{codes/#2}
+}
