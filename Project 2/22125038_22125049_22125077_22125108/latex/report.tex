@@ -15,6 +15,8 @@
 \usepackage{colortbl}
 \usepackage{multicol}
 \usepackage{longtable}
+\usepackage{cite}
+\usepackage{float}
 \usepackage[vietnamese, english]{babel}
 \usepackage[a4paper, total={6in, 8in}, margin=1in]{geometry}
 \usepackage{styles/standard}
@@ -81,6 +83,17 @@
 \setcounter{page}{1}
 \Section{Introduction}
 
+The Decision Tree algorithm is a supervised learning algorithm that can be used for both classification and regression tasks. The algorithm works by recursively splitting the dataset into subsets based on the most discriminative features. The splitting process continues until the tree reaches a maximum depth or the number of samples in a node falls below a certain threshold. The Decision Tree algorithm is simple to understand and interpret, making it an excellent choice for tasks that require transparency and interpretability.
+
+In this project, we implement the Decision Tree algorithm using Python and the \texttt{scikit-learn} library. We evaluate the algorithm's performance on three different datasets from the UCI Machine Learning Repository. The datasets are as follows:
+\begin{enumerate}
+    \item The UCI Breast Cancer Wisconsin dataset \cite{breast_cancer_wisconsin}
+    \item The UCI Wine Quality dataset \cite{wine_quality}
+    \item The UCI User Knowledge Modeling dataset \cite{user_knowledge_modeling}
+\end{enumerate}
+
+Note that \textbf{all figures and tables} in this report are in the \textbf{vector image format} for better readability and quality as the reader zooms in since the illustrations can be too complex to be displayed.
+
 \include{dataset1}
 
 \include{dataset2}
@@ -91,5 +104,14 @@
 \Section{Conclusion}
 
 \Section{Self-evaluation}
+
+\Section{Contributions}
+
+What the hell is this?
+
+\newpage
+\bibliographystyle{ieeetr}
+\bibliography{references}
+\addcontentsline{toc}{section}{References}
 
 \end{document}
