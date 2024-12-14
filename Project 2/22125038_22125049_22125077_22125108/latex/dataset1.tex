@@ -218,11 +218,13 @@ The Decision Tree classifier's performance is evaluated by varying the maximum d
     \begin{tabular}{|l|c|c|c|c|c|c|c|}
         \hline
         \textbf{\texttt{max\_depth}} & None & 2 & 3 & 4 & 5 & 6 & 7 \\ \hline
-        \textbf{Accuracy} & 0.86 & 0.89 & 0.92 & 0.91 & 0.91 & 0.91 & 0.91 \\ \hline
+        \textbf{Accuracy} & 0.89 & 0.89 & 0.93 & 0.89 & 0.87 & 0.89 & 0.89 \\ \hline
     \end{tabular}
     \caption{Breast Cancer Wisconsin dataset Depth vs Accuracy}
     \label{tab:breast_cancer_wisconsin_depth_vs_accuracy}
 \end{table}
+
+The table \ref{tab:breast_cancer_wisconsin_depth_vs_accuracy} shows that the Decision Tree classifier achieves the highest accuracy on the test data when the maximum depth of the tree is 3. The accuracy decreases as the maximum depth increases, indicating that the model overfits the training data when the tree is too deep.
 
 \begin{figure}[H]
     \centering
@@ -231,6 +233,4 @@ The Decision Tree classifier's performance is evaluated by varying the maximum d
     \label{fig:breast_cancer_wisconsin_depth_vs_accuracy}
 \end{figure}
 
-The plot in figure \ref{fig:breast_cancer_wisconsin_depth_vs_accuracy} shows that the Decision Tree classifier achieves the highest accuracy on the test data
-when the maximum depth of the tree is 3. The accuracy decreases as the maximum depth increases, indicating that the model overfits the training data when the tree is too deep.
-
+The plot in figure \ref{fig:breast_cancer_wisconsin_depth_vs_accuracy} supports the findings in table \ref{tab:breast_cancer_wisconsin_depth_vs_accuracy}.

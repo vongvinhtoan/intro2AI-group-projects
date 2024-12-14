@@ -227,6 +227,30 @@ The confusion matrices in figure \ref{fig:user_knowledge_modeling_confusion_matr
 
 The Decision Tree classifier's performance is evaluated by varying the maximum depth of the tree. The accuracy of the classifier is computed for different maximum depths using the \texttt{accuracy\_score} function from the \texttt{sklearn.metrics} module for the Decision Tree classifier with a test size of 20\%.
 
+% Accuracy of Decision Tree with Max Depth = None
+% (9): 0.90
+% Accuracy of Decision Tree with Max Depth = 2: 0.78
+% Accuracy of Decision Tree with Max Depth = 3: 0.88
+% Accuracy of Decision Tree with Max Depth = 4: 0.90
+% Accuracy of Decision Tree with Max Depth = 5: 0.90
+% Accuracy of Decision Tree with Max Depth = 6: 0.90
+% Accuracy of Decision Tree with Max Depth = 7: 0.91
+% Accuracy of Decision Tree with Max Depth = 8: 0.91
+% Accuracy of Decision Tree with Max Depth = 9: 0.90
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{\texttt{max\_depth}} & None & 2 & 3 & 4 & 5 & 6 & 7 \\ \hline
+        \textbf{Accuracy} & 0.90 & 0.78 & 0.88 & 0.90 & 0.90 & 0.90 & 0.91 \\ \hline
+    \end{tabular}
+    \caption{User Knowledge Modeling dataset Depth vs Accuracy}
+    \label{tab:user_knowledge_modeling_depth_vs_accuracy}
+\end{table}
+
+The results in table \ref{tab:user_knowledge_modeling_depth_vs_accuracy} show that the Decision Tree classifier achieves the highest accuracy on the test data when the maximum depth is around 7. The accuracy decreases slightly as the maximum depth increases beyond 7, indicating that the model starts to overfit the training data but still performs well on the test data.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/user_knowledge_modeling_accuracy_vs_max_depth.pdf}
@@ -234,5 +258,5 @@ The Decision Tree classifier's performance is evaluated by varying the maximum d
     \label{fig:user_knowledge_modeling_accuracy_vs_max_depth}
 \end{figure}
 
-The plot in figure \ref{fig:user_knowledge_modeling_accuracy_vs_max_depth} shows that the Decision Tree classifier achieves the highest accuracy on the test data when the maximum depth is around 7. The accuracy decreases slightly as the maximum depth increases beyond 7, indicating that the model starts to overfit the training data but still performs well on the test data.
+The plot in figure \ref{fig:user_knowledge_modeling_accuracy_vs_max_depth} visualizes the relationship between the maximum depth of the Decision Tree classifier and the accuracy on the test data. The accuracy increases as the maximum depth grows from 2 to 7 and then stabilizes around 0.91. The plot demonstrates that the model achieves the best performance when the maximum depth is set to 7.
 
