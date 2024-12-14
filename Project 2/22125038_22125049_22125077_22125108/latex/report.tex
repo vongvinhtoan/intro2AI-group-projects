@@ -11,12 +11,14 @@
 \usepackage{amssymb}
 \usepackage{array}
 \usepackage{multirow}
+\usepackage{makecell}
 \usepackage{fancyhdr}
 \usepackage{colortbl}
 \usepackage{multicol}
 \usepackage{longtable}
 \usepackage{cite}
 \usepackage{float}
+\usepackage{tabularx}
 \usepackage[vietnamese, english]{babel}
 \usepackage[a4paper, total={6in, 8in}, margin=1in]{geometry}
 \usepackage{styles/standard}
@@ -101,7 +103,36 @@ Note that \textbf{all figures and tables} in this report are in the \textbf{vect
 \include{dataset3}
 
 \newpage
+\Section{Comparison}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \makecell{\textbf{Criterion}} & 
+        \makecell{\textbf{Breast Cancer} \\ \textbf{Wisconsin}} & 
+        \makecell{\textbf{Wine} \\ \textbf{Quality}} & 
+        \makecell{\textbf{User Knowledge} \\ \textbf{Modeling}} \\ \hline
+        \textbf{Accuracy (80/20)} & 89\% & 77\% & 90\% \\ \hline
+        \textbf{No. of Instances} & 569 & 4898 & 403 \\ \hline
+        \textbf{No. of Features} & 30 & 11 & 5 \\ \hline
+        \textbf{No. of Classes} & 2 & 3 & 4 \\ \hline
+        \textbf{Imbalance} & Slight & Heavy & Balanced \\ \hline
+        \textbf{Overfitting} & Yes & No & Slight \\ \hline
+        \textbf{Complexity} & Medium & High & Medium \\ \hline
+    \end{tabularx}
+    \caption{Comparison of Decision Tree algorithm performance on different datasets}
+\end{table}
+
 \Section{Conclusion}
+
+In this project, we implemented the Decision Tree algorithm using Python and the \texttt{scikit-learn} library. We evaluated the algorithm's performance on three different datasets from the UCI Machine Learning Repository.
+
+We compared the algorithm's performance on the three datasets based on several criteria, including accuracy, number of instances, number of features, number of classes, imbalance, overfitting, and complexity.
+
+The results show that the Decision Tree algorithm can achieve high accuracy on 2 out of 3 datasets. The algorithm performs well on the Breast Cancer Wisconsin dataset and the User Knowledge Modeling dataset, achieving an accuracy of 89\% and 90\%, respectively. However, the algorithm performs poorly on the Wine Quality dataset, achieving an accuracy of only 77\%. The poor performance on the Wine Quality dataset may be due to the dataset's complexity and the algorithm's inability to capture the underlying patterns in the data. 
+
+The algorithm is simple to understand and interpret, making it an excellent choice for tasks that require transparency and interpretability.
 
 \Section{Self-evaluation}
 

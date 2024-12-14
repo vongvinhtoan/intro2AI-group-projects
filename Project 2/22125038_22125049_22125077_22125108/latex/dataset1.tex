@@ -183,6 +183,7 @@ M & 0.87 & 0.95 & 0.91 & 21 \\
 
 The classification reports show that the Decision Tree classifier performs well on the Breast Cancer Wisconsin dataset, achieving an accuracy of 92\% for the test size of 60\%, 91\% for the test size of 40\%, 89\% for the test size of 20\%, and 93\% for the test size of 10\%. The classifier has high precision, recall, and F1-score for both classes, indicating that it effectively distinguishes between malignant and benign samples.
 
+Prediction performance is better for the benign class, with higher precision, recall, and F1-scores across all test sizes, likely due to the dataset's imbalance favoring benign samples.
 \subsubsection{Confusion matrix}
 
 The confusion matrix provides a visual representation of the Decision Tree classifier's performance using the \texttt{confusion\_matrix} function from the \texttt{sklearn.metrics} module. The matrix shows the number of true positive, false positive, true negative, and false negative samples for each class.
@@ -211,6 +212,17 @@ The confusion matrices in figure \ref{fig:breast_cancer_wisconsin_confusion_matr
 \subsection{Depth vs Accuracy evaluation}
 
 The Decision Tree classifier's performance is evaluated by varying the maximum depth of the tree. The accuracy of the classifier is computed for different maximum depths using the \texttt{accuracy\_score} function from the \texttt{sklearn.metrics} module for the Decision Tree classifier with a test size of 20\%.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{\texttt{max\_depth}} & None & 2 & 3 & 4 & 5 & 6 & 7 \\ \hline
+        \textbf{Accuracy} & 0.86 & 0.89 & 0.92 & 0.91 & 0.91 & 0.91 & 0.91 \\ \hline
+    \end{tabular}
+    \caption{Breast Cancer Wisconsin dataset Depth vs Accuracy}
+    \label{tab:breast_cancer_wisconsin_depth_vs_accuracy}
+\end{table}
 
 \begin{figure}[H]
     \centering
